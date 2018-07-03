@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_InicioController">
+   <children>
+      <Pane prefHeight="622.0" prefWidth="98.0" style="-fx-background-color: #2980B9;">
+         <children>
+            <JFXButton fx:id="btnVendas" layoutY="-1.0" onAction="#ActionVendas" prefHeight="62.0" prefWidth="98.0" text="Vender" textFill="#f8f7f7">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="bntEstoque" layoutY="123.0" onAction="#ActionEstoque" prefHeight="62.0" prefWidth="98.0" text="Estôque" textFill="#f8f7f7">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="bntGraficos" layoutY="185.0" onAction="#ActionGraficos" prefHeight="62.0" prefWidth="98.0" text="Gráficos" textFill="#f8f7f7">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="bntRelatorios" layoutY="249.0" onAction="#ActionRelatorios" prefHeight="62.0" prefWidth="98.0" text="Relatórios" textFill="#f8f7f7">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnClientes" layoutY="61.0" onAction="#ActionClientes" prefHeight="62.0" prefWidth="98.0" text="Clientes" textFill="#f8f7f7">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <AnchorPane fx:id="AnchorPaneMae" prefHeight="622.0" prefWidth="1026.0">
+         <children>
+            <ImageView fitHeight="198.0" fitWidth="290.0" layoutX="463.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/icons8-serviÃ§os-480.png" />
+               </image></ImageView>
+         </children></AnchorPane>
+   </children>
+</HBox>
