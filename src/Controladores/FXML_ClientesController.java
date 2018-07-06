@@ -161,6 +161,7 @@ public class FXML_ClientesController implements Initializable {
         boolean r = false;
         try {
             Alert dialogo1 = new Alert(Alert.AlertType.CONFIRMATION);
+            //mensagem de confirmaçao para excluir
             dialogo1.setTitle("Atenção");
             dialogo1.setHeaderText("Deseja realmente excluir o cliente " + tabela_cliente.getSelectionModel().getSelectedItem().getNome().getValue() + "?");
             dialogo1.getButtonTypes().add(ButtonType.YES);
