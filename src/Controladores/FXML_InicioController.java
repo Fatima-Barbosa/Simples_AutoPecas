@@ -45,12 +45,12 @@ public class FXML_InicioController implements Initializable {
 
     @FXML
     private void ActionVendas(ActionEvent event) throws IOException {
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/VIEW/FXML_Vendas.fxml"));
-        AnchorPaneMae.getChildren().setAll(a);
     }
 
     @FXML
-    private void ActionEstoque(ActionEvent event) {
+    private void ActionEstoque(ActionEvent event) throws IOException {
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/VIEW/FXML_Produto.fxml"));
+        AnchorPaneMae.getChildren().setAll(a);
     }
 
     @FXML

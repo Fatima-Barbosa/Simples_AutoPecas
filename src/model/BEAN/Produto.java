@@ -37,7 +37,13 @@ public class Produto {
         this.id = new SimpleLongProperty(id);
     }
 
-    
+    public Produto(String nome, Double preco, String codBarra, int qtd, Long id) {
+        this.nome = new SimpleStringProperty(nome);
+        this.preco = new SimpleDoubleProperty(preco);
+        this.codBarra = new SimpleStringProperty(codBarra);
+        this.qtd = new SimpleIntegerProperty(qtd);
+        this.id = new SimpleLongProperty(id);
+    }
     
     public SimpleStringProperty getNome() {
         return nome;
