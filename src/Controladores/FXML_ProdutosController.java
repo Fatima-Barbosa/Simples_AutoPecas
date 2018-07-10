@@ -10,7 +10,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -163,10 +166,33 @@ public class FXML_ProdutosController implements Initializable {
 
     @FXML
     private void on_excluir(ActionEvent event) {
+        boolean r = false;
         try {
-            dao.remover(tabelaProdutos.getSelectionModel().getSelectedItem().getId().longValue());
-            atualizar();
+
+            Alert dialogo1 = new Alert(Alert.AlertType.CONFIRMATION);
+            //mensagem de confirmaçao para excluir
+            dialogo1.setTitle("Atenção");
+            dialogo1.setHeaderText("Deseja realmente excluir o item: " + tabelaProdutos.getSelectionModel().getSelectedItem().getNome().getValue() + "?");
+            dialogo1.getButtonTypes().add(ButtonType.YES);
+            ButtonType btn = new ButtonType("Sim", ButtonBar.ButtonData.YES);
+            ButtonType btn1 = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialogo1.getButtonTypes().setAll(btn, btn1);
+            r = dialogo1.showAndWait().get().equals(btn);
+
+            if (r) {
+                dao.remover(tabelaProdutos.getSelectionModel().getSelectedItem().getId().longValue());
+                atualizar();
+                Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
+                dialogo.setTitle("Item excluido!");
+                dialogo.setHeaderText("Operaçao bem sucedida!");
+                dialogo.showAndWait();
+            }
+
         } catch (SQLException ex) {
+            Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
+            dialogo.setTitle("Não foi possivel realizar a operação!");
+            dialogo.setHeaderText("erro!");
+            dialogo.showAndWait();
             Logger.getLogger(FXML_ProdutosController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
