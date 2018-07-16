@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorPane_Vendas" prefHeight="622.0" prefWidth="1026.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_ProdutosController">
+<AnchorPane id="AnchorPane" fx:id="AnchorPane_Vendas" prefHeight="622.0" prefWidth="1026.0" style="-fx-background-color: #B4CDCD;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_ProdutosController">
    <children>
-      <Label layoutX="611.0" layoutY="14.0" text="Produtos" textFill="#4597d1">
+      <Label layoutX="611.0" layoutY="14.0" text="Produtos" textFill="#2980b9">
          <font>
             <Font name="Calibri Bold" size="23.0" />
          </font>
@@ -37,7 +37,7 @@
       </TableView>
       <Label layoutX="331.0" layoutY="587.0" text="Pesquisar" textFill="#2980b9">
          <font>
-            <Font name="Calibri Bold" size="14.0" />
+            <Font name="Calibri Bold" size="15.0" />
          </font>
       </Label>
       <TextField fx:id="txt_busc" layoutX="395.0" layoutY="583.0" onKeyPressed="#txt_busc_key" prefHeight="25.0" prefWidth="160.0" AnchorPane.bottomAnchor="14.0" />
@@ -49,32 +49,32 @@
       </Button>
       <TextField fx:id="txt_nome" layoutX="636.0" layoutY="128.0" prefHeight="25.0" prefWidth="172.0" />
       <TextField fx:id="txt_cod" layoutX="841.0" layoutY="128.0" prefHeight="25.0" prefWidth="160.0" />
-      <Label layoutX="638.0" layoutY="99.0" text="Nome">
+      <Label layoutX="637.0" layoutY="99.0" text="Nome" textFill="#2980b9">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="841.0" layoutY="100.0" text="Código de Barra">
+      <Label layoutX="841.0" layoutY="100.0" text="Código de Barra" textFill="#2980b9">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
       <TextField fx:id="txt_qtd" layoutX="841.0" layoutY="199.0" prefHeight="25.0" prefWidth="160.0" />
       <TextField fx:id="txt_preco" layoutX="841.0" layoutY="263.0" prefHeight="25.0" prefWidth="160.0" />
-      <Label layoutX="637.0" layoutY="170.0" text="Descrição">
+      <Label layoutX="637.0" layoutY="170.0" text="Descrição" textFill="#2980b9">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
       <TextArea fx:id="txt_descricao" layoutX="636.0" layoutY="199.0" prefHeight="93.0" prefWidth="172.0" />
-      <Label layoutX="842.0" layoutY="173.0" text="Quantidade">
+      <Label layoutX="842.0" layoutY="173.0" text="Quantidade" textFill="#2980b9">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="842.0" layoutY="237.0" text="Preço">
+      <Label layoutX="842.0" layoutY="237.0" text="Preço" textFill="#2980b9">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
    </children>

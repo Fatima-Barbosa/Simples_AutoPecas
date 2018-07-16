@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="622.0" prefWidth="1026.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_ClientesController">
+<AnchorPane id="AnchorPane" prefHeight="622.0" prefWidth="1026.0" style="-fx-background-color: #B4CDCD;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_ClientesController">
    <children>
       <TableView fx:id="tabela_cliente" prefHeight="575.0" prefWidth="602.0">
         <columns>
@@ -30,12 +30,12 @@
             </ContextMenu>
          </contextMenu>
       </TableView>
-      <Label layoutX="611.0" layoutY="14.0" text="Clientes" textFill="#4597d1" AnchorPane.topAnchor="14.0">
+      <Label layoutX="611.0" layoutY="14.0" text="Clientes" textFill="#2980b9" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Calibri Bold" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="330.0" layoutY="587.0" text="Pesquisar" textFill="#188097">
+      <Label layoutX="330.0" layoutY="587.0" text="Pesquisar" textFill="#2980b9">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
@@ -46,29 +46,29 @@
       <TextField fx:id="txt_cpf" layoutX="809.0" layoutY="124.0" prefHeight="25.0" prefWidth="187.0" />
       <TextField fx:id="txt_telefone" layoutX="631.0" layoutY="198.0" prefHeight="25.0" prefWidth="160.0" />
       <TextField fx:id="txt_conta" layoutX="631.0" layoutY="263.0" prefHeight="25.0" prefWidth="160.0" />
-      <Label layoutX="631.0" layoutY="97.0" text="Nome">
+      <Label layoutX="631.0" layoutY="97.0" text="Nome" textFill="#2980b9">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="809.0" layoutY="97.0" text="CPF">
+      <Label layoutX="809.0" layoutY="97.0" text="CPF" textFill="#2980b9">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="630.0" layoutY="172.0" text="Telefone">
+      <Label layoutX="630.0" layoutY="172.0" text="Telefone" textFill="#2980b9">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="809.0" layoutY="172.0" text="Endereço">
+      <Label layoutX="809.0" layoutY="172.0" text="Endereço" textFill="#2980b9">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="633.0" layoutY="236.0" text="Conta">
+      <Label layoutX="633.0" layoutY="236.0" text="Conta" textFill="#2980b9">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
       <TextArea fx:id="txt_endereco" layoutX="809.0" layoutY="198.0" prefHeight="90.0" prefWidth="187.0" />

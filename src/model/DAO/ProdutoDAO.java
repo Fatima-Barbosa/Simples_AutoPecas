@@ -70,15 +70,52 @@ public class ProdutoDAO {
 
         return Lista;
     }
+
+    public long pegarID(String cod){
+        Long id = null;
+        connection = new ConnectionFactory().getConnection();
+        sql = "SELECT * FROM produtos where codBarra = ?;";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, cod);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {                
+                id = rs.getLong("id");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro: "+ex);
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
     
-        public ObservableList<Produto> FiltrarLista(String n) {
+    public Double pegarPreco(String cod){
+        Double total = null;
+        connection = new ConnectionFactory().getConnection();
+        sql = "SELECT * FROM produtos where codBarra = ?";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, cod);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {                
+                total = rs.getDouble("preco");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro: "+ex);
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
+    public ObservableList<Produto> FiltrarLista(String n) {
         connection = new ConnectionFactory().getConnection();
         ObservableList<Produto> Lista
                 = FXCollections.observableArrayList();
 
         try {
-            stmt = connection.prepareStatement("select * from produtos where nome like ?;");
+            stmt = connection.prepareStatement("select * from produtos where nome like ? or codBarra like ?;");
             stmt.setString(1, "%" + n + "%");
+            stmt.setString(2, "%" + n + "%");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Lista.add(new Produto(

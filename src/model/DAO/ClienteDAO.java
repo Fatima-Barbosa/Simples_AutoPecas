@@ -82,7 +82,7 @@ public class ClienteDAO {
         stmt.execute();
         System.out.println("Excluido com sucesso!");
         stmt.close();
-
+        connection.close();
     }
 
     public void update(Cliente c) {

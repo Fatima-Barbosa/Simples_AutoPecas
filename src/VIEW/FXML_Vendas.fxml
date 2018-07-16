@@ -1,15 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorPane_Vendas" prefHeight="622.0" prefWidth="1026.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_VendasController">
+<AnchorPane id="AnchorPane" fx:id="AnchorPane_Vendas" prefHeight="622.0" prefWidth="1026.0" style="-fx-background-color: #E6E6FA;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_VendasController">
    <children>
-      <Label layoutX="473.0" layoutY="14.0" text="Vendas" textFill="#2980b9">
+      <Label layoutX="481.0" layoutY="24.0" text="Vendas" textFill="#2980b9" AnchorPane.leftAnchor="481.0" AnchorPane.rightAnchor="480.0">
          <font>
             <Font name="Calibri Bold" size="21.0" />
          </font>
       </Label>
+      <AnchorPane layoutX="20.0" layoutY="50.0" prefHeight="558.0" prefWidth="984.0" style="-fx-border-color: #C1CDCD; -fx-background-color: #B4CDCD;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <TextField fx:id="txtCod" layoutX="22.0" layoutY="35.0" onKeyPressed="#onKey_PegarValores" prefHeight="25.0" prefWidth="232.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtPrecoU" editable="false" layoutX="439.0" layoutY="35.0" prefHeight="37.0" prefWidth="165.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtQTD" layoutX="279.0" layoutY="35.0" onKeyPressed="#onKey_CalcularTotal" prefHeight="25.0" prefWidth="138.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <JFXButton id="button" fx:id="btnVender" layoutX="795.0" layoutY="34.0" onAction="#on_vender" prefHeight="37.0" prefWidth="165.0" style="-fx-border-radius: 30px; -fx-background-color: #1E90FF;" stylesheets="@css.css" text="Vender" textFill="#fffafa">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="23.0" layoutY="10.0" text="Código de Barras" textFill="#2980b9">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="441.0" layoutY="10.0" text="Preço Unitário" textFill="#2980b9">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="280.0" layoutY="10.0" text="Quantidade" textFill="#2980b9">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtTotal" editable="false" layoutX="625.0" layoutY="34.0" prefHeight="37.0" prefWidth="149.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Label layoutX="625.0" layoutY="10.0" text="Total" textFill="#2980b9">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tabelaItens" accessibleText="Vendas" layoutX="20.0" layoutY="123.0" prefHeight="360.0" prefWidth="587.0" AnchorPane.leftAnchor="20.0">
+              <columns>
+                <TableColumn fx:id="colProduto" prefWidth="150.0" text="Produto" />
+                <TableColumn fx:id="colQTD" prefWidth="109.0" text="Quantidade" />
+                  <TableColumn fx:id="colPrecoU" prefWidth="118.0" text="Preco unitário" />
+                  <TableColumn fx:id="col_IDvenda" prefWidth="110.0" text="ID_Venda" />
+                  <TableColumn fx:id="colTotal" prefWidth="98.0" text="Total" />
+              </columns>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+            <TableView fx:id="tabelaVendas" layoutX="625.0" layoutY="123.0" prefHeight="360.0" prefWidth="341.0">
+              <columns>
+                <TableColumn fx:id="colDataVendas" prefWidth="168.0" text="Data" />
+                <TableColumn fx:id="colID" prefWidth="86.0" text="ID" />
+                  <TableColumn fx:id="colTotalvendas" prefWidth="86.0" text="Total" />
+              </columns>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                        <MenuItem fx:id="menuItemExcluirVenda" mnemonicParsing="false" onAction="#on_menuItemExcluirVenda" text="Excluir venda" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+            <Label layoutX="21.0" layoutY="94.0" text="Itens da venda" textFill="#2980b9">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="625.0" layoutY="94.0" text="Vendas do dia" textFill="#2980b9">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelTotalVendas" layoutX="626.0" layoutY="503.0" text="Total das vendas: ..." textFill="#2980b9">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton id="button" fx:id="btnNovaVenda" layoutX="23.0" layoutY="498.0" onAction="#on_NovaVenda" onKeyPressed="#on_NovaVendaF1" prefHeight="37.0" prefWidth="55.0" style="-fx-border-radius: 30px; -fx-background-color: #1E90FF;" stylesheets="@css.css" text="Vender" textFill="#fffafa">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <MenuBar prefHeight="25.0" prefWidth="1026.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Vendas">
+            <items>
+              <MenuItem fx:id="menuItemNova_venda" mnemonicParsing="false" onAction="#on_menuItem_novaVenda" text="Nova venda       F1" />
+                  <MenuItem mnemonicParsing="false" text="Relatório do dia" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Clientes" />
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+                  <MenuItem fx:id="menuItem_sair" mnemonicParsing="false" onAction="#on_menuItem_Sair" text="Sair" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>
