@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -36,7 +37,7 @@
                   <Font size="16.0" />
                </font>
             </TextField>
-            <JFXButton id="button" fx:id="btnVender" layoutX="795.0" layoutY="34.0" onAction="#on_vender" prefHeight="37.0" prefWidth="165.0" style="-fx-border-radius: 30px; -fx-background-color: #1E90FF;" stylesheets="@css.css" text="Vender" textFill="#fffafa">
+            <JFXButton id="button" fx:id="btnVender" layoutX="795.0" layoutY="34.0" onAction="#on_vender" prefHeight="37.0" prefWidth="165.0" style="-fx-border-radius: 30px; -fx-background-color: #1E90FF;" stylesheets="@css.css" text="Finalizar venda" textFill="#fffafa">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -77,12 +78,13 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                      <MenuItem fx:id="cont_RemoverItemVenda" mnemonicParsing="false" onAction="#on_cont_RemoverItemVenda" text="Remover" />
+                        <MenuItem fx:id="cont_AlterarQTDItemVenda" mnemonicParsing="false" onAction="#on_cont_AlterarQTDItemVenda" text="Alterar quantidade" />
                     </items>
                   </ContextMenu>
                </contextMenu>
             </TableView>
-            <TableView fx:id="tabelaVendas" layoutX="625.0" layoutY="123.0" prefHeight="360.0" prefWidth="341.0">
+            <TableView fx:id="tabelaVendas" layoutX="625.0" layoutY="123.0" onMouseClicked="#on_ver_itens" prefHeight="360.0" prefWidth="341.0">
               <columns>
                 <TableColumn fx:id="colDataVendas" prefWidth="168.0" text="Data" />
                 <TableColumn fx:id="colID" prefWidth="86.0" text="ID" />
@@ -111,12 +113,14 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <JFXButton id="button" fx:id="btnNovaVenda" layoutX="23.0" layoutY="498.0" onAction="#on_NovaVenda" onKeyPressed="#on_NovaVendaF1" prefHeight="37.0" prefWidth="55.0" style="-fx-border-radius: 30px; -fx-background-color: #1E90FF;" stylesheets="@css.css" text="Vender" textFill="#fffafa">
+            <JFXButton fx:id="btnNovaVenda" layoutX="23.0" layoutY="498.0" onAction="#on_NovaVenda" onKeyPressed="#on_NovaVendaF1" prefHeight="37.0" prefWidth="55.0" ripplerFill="BLACK" style="-fx-border-radius: 30px; -fx-background-color: #1E90FF;" textFill="#fffafa">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-         </children>
+            <!--<FontAwesomeIcon fill="WHITE" iconName="CART-OUTLINE" layoutX="35.0" layoutY="523.0" size="1.5em" textAlignment="CENTER" wrappingWidth="26.999988734722137" />
+            -->
+             </children>
       </AnchorPane>
       <MenuBar prefHeight="25.0" prefWidth="1026.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>

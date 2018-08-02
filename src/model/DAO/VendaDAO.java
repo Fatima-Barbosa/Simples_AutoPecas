@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.BEAN.vendas;
@@ -25,12 +28,13 @@ public class VendaDAO {
 
     public void adicionarVenda(vendas v){
         connection = new ConnectionFactory().getConnection();
-
-        sql = "insert into venda(valorTotal) values(?)";
+        Date d = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        sql = "insert into venda(valorTotal, dataV) values(?,?)";
         try {
             stmt = connection.prepareStatement(sql);
             stmt.setDouble(1, v.getValorTotal().doubleValue());
-            
+            stmt.setString(2, dateFormat.format(d));
             stmt.execute();
             System.out.println("Venda realizada");
             stmt.close();
@@ -72,7 +76,22 @@ public class VendaDAO {
             Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+        public void atualizarTotalRemovido(Double t, Long id){
+        connection = new ConnectionFactory().getConnection();
+        sql = "UPDATE venda SET valorTotal = valorTotal - ? WHERE id = ?;";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setDouble(1, t);
+            stmt.setLong(2, id);
+            stmt.executeUpdate();
+            System.out.println("Atualizado total da venda");
+            stmt.close();
+            connection.close();
+        } catch (SQLException ex) {
+            System.out.println("Erro :"+ex);
+            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public void atualizar(vendas v){
         connection = new ConnectionFactory().getConnection();
         sql = "UPDATE venda SET dataV = ?, valorTotal = ? WHERE id = ?;";
@@ -90,14 +109,15 @@ public class VendaDAO {
         }
     }
     
-    public ObservableList<vendas> gerarLista(){
+    public ObservableList<vendas> gerarLista(String data){
         connection = new ConnectionFactory().getConnection();
         ObservableList<vendas> Lista
                 = FXCollections.observableArrayList();
         
-        sql = "select * from venda";
+        sql = "select * from venda where dataV = ?";
         try {
             stmt = connection.prepareStatement(sql);
+            stmt.setString(1, data);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {                
                 Lista.add(new vendas(

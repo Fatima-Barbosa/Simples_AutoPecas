@@ -25,10 +25,9 @@ public class FXML_InicioController implements Initializable {
     @FXML
     private JFXButton bntRelatorios;
     @FXML
-    private AnchorPane AnchorPaneMae;
+    public AnchorPane AnchorPaneMae;
     @FXML
     private JFXButton btnClientes;
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -40,8 +39,7 @@ public class FXML_InicioController implements Initializable {
         assert btnClientes != null : "fx:id=\"btnClientes\" was not injected: check your FXML file 'FXML_Inicio.fxml'.";
         assert AnchorPaneMae != null : "fx:id=\"AnchorPaneMae\" was not injected: check your FXML file 'FXML_Inicio.fxml'.";
 
-  
-    }    
+    }
 
     @FXML
     private void ActionVendas(ActionEvent event) throws IOException {
@@ -68,5 +66,5 @@ public class FXML_InicioController implements Initializable {
         AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/VIEW/FXML_Clientes.fxml"));
         AnchorPaneMae.getChildren().setAll(a);
     }
-    
+
 }

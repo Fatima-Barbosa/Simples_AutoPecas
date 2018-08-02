@@ -13,12 +13,12 @@
 
 <AnchorPane id="AnchorPane" fx:id="AnchorPane_Vendas" prefHeight="622.0" prefWidth="1026.0" style="-fx-background-color: #B4CDCD;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_ProdutosController">
    <children>
-      <Label layoutX="611.0" layoutY="14.0" text="Produtos" textFill="#2980b9">
+      <Label layoutX="609.0" layoutY="14.0" text="Produtos" textFill="#2980b9" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Calibri Bold" size="23.0" />
          </font>
       </Label>
-      <TableView fx:id="tabelaProdutos" prefHeight="575.0" prefWidth="602.0">
+      <TableView fx:id="tabelaProdutos" prefHeight="575.0" prefWidth="602.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="424.0" AnchorPane.topAnchor="0.0">
         <columns>
           <TableColumn fx:id="col_Nome" prefWidth="149.0" text="Nome" />
             <TableColumn fx:id="col_Cod" prefWidth="177.0" text="Cod_Barra" />
@@ -35,44 +35,59 @@
             </ContextMenu>
          </contextMenu>
       </TableView>
-      <Label layoutX="331.0" layoutY="587.0" text="Pesquisar" textFill="#2980b9">
+      <Label layoutX="317.0" layoutY="587.0" text="Pesquisar" textFill="#2980b9" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="641.0">
          <font>
-            <Font name="Calibri Bold" size="15.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txt_busc" layoutX="395.0" layoutY="583.0" onKeyPressed="#txt_busc_key" prefHeight="25.0" prefWidth="160.0" AnchorPane.bottomAnchor="14.0" />
-      <Button fx:id="btn_ok" layoutX="566.0" layoutY="583.0" mnemonicParsing="false" onAction="#on_ok" prefHeight="25.0" prefWidth="36.0" style="-fx-background-color: #2980B9;" text="Ok" textFill="WHITE" />
-      <Button fx:id="btn_salvar" layoutX="841.0" layoutY="313.0" mnemonicParsing="false" onAction="#on_salvar" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #2980B9;" text="Salvar" textFill="WHITE">
+      <TextField fx:id="txt_busc" layoutX="395.0" layoutY="583.0" onKeyPressed="#txt_busc_key" prefHeight="25.0" prefWidth="160.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="471.0" />
+      <Button fx:id="btn_ok" layoutX="566.0" layoutY="583.0" mnemonicParsing="false" onAction="#on_ok" prefHeight="25.0" prefWidth="36.0" style="-fx-background-color: #2980B9;" text="Ok" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="424.0" />
+      <Button fx:id="btn_salvar" layoutX="841.0" layoutY="311.0" mnemonicParsing="false" onAction="#on_salvar" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #2980B9;" text="Salvar" textFill="WHITE" AnchorPane.rightAnchor="25.0">
          <font>
             <Font name="Calibri Bold" size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="txt_nome" layoutX="636.0" layoutY="128.0" prefHeight="25.0" prefWidth="172.0" />
-      <TextField fx:id="txt_cod" layoutX="841.0" layoutY="128.0" prefHeight="25.0" prefWidth="160.0" />
-      <Label layoutX="637.0" layoutY="99.0" text="Nome" textFill="#2980b9">
+      <TextField fx:id="txt_nome" layoutX="636.0" layoutY="128.0" prefHeight="25.0" prefWidth="172.0" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
+      <TextField fx:id="txt_cod" layoutX="841.0" layoutY="128.0" prefHeight="25.0" prefWidth="160.0" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
+      <Label layoutX="637.0" layoutY="99.0" text="Nome" textFill="#2980b9" AnchorPane.rightAnchor="343.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="841.0" layoutY="100.0" text="Código de Barra" textFill="#2980b9">
+      <Label layoutX="841.0" layoutY="99.0" text="Código de Barra" textFill="#2980b9" AnchorPane.rightAnchor="63.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txt_qtd" layoutX="841.0" layoutY="199.0" prefHeight="25.0" prefWidth="160.0" />
-      <TextField fx:id="txt_preco" layoutX="841.0" layoutY="263.0" prefHeight="25.0" prefWidth="160.0" />
-      <Label layoutX="637.0" layoutY="170.0" text="Descrição" textFill="#2980b9">
+      <TextField fx:id="txt_qtd" layoutX="841.0" layoutY="199.0" prefHeight="25.0" prefWidth="160.0" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
+      <TextField fx:id="txt_preco" layoutX="841.0" layoutY="263.0" prefHeight="25.0" prefWidth="160.0" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
+      <Label layoutX="636.0" layoutY="170.0" text="Descrição" textFill="#2980b9" AnchorPane.rightAnchor="317.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextArea fx:id="txt_descricao" layoutX="636.0" layoutY="199.0" prefHeight="93.0" prefWidth="172.0" />
-      <Label layoutX="842.0" layoutY="173.0" text="Quantidade" textFill="#2980b9">
+      <TextArea fx:id="txt_descricao" layoutX="636.0" layoutY="199.0" prefHeight="93.0" prefWidth="172.0" AnchorPane.rightAnchor="218.0">
+         <font>
+            <Font size="13.0" />
+         </font></TextArea>
+      <Label layoutX="841.0" layoutY="170.0" text="Quantidade" textFill="#2980b9" AnchorPane.rightAnchor="97.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="842.0" layoutY="237.0" text="Preço" textFill="#2980b9">
+      <Label layoutX="842.0" layoutY="237.0" text="Preço" textFill="#2980b9" AnchorPane.rightAnchor="141.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

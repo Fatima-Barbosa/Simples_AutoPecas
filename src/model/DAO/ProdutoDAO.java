@@ -70,6 +70,24 @@ public class ProdutoDAO {
 
         return Lista;
     }
+    
+    public int verificarEstoque(int cod){
+        int qtd = 0;
+        connection = new ConnectionFactory().getConnection();
+        sql = "SELECT * FROM produtos where codBarra = ?;";
+                try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, cod);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {                
+                qtd = rs.getInt("qtd");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro: "+ex);
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return qtd;
+    }
 
     public long pegarID(String cod){
         Long id = null;
@@ -165,6 +183,39 @@ public class ProdutoDAO {
             System.out.println("\n Produto Atualizado!\n");
         } catch (SQLException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateQTD(int qtd, long id) {
+        connection = new ConnectionFactory().getConnection();
+
+        try {
+            stmt = connection.prepareStatement("UPDATE produtos SET qtd = qtd + ? WHERE id = ?;");
+            stmt.setInt(1, qtd);
+            stmt.setLong(2, id);
+            stmt.executeUpdate();
+            connection.close();
+            stmt.close();
+            System.out.println("\nQuantidade Atualizada!\n");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void baixaQTD(int qtd, long id) {
+        connection = new ConnectionFactory().getConnection();
+        sql = "UPDATE produtos SET qtd = qtd - ? WHERE id = ?;";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, qtd);
+            stmt.setLong(2, id);
+            stmt.execute();
+            System.out.println("Atualizou qtd do produto!");
+            stmt.close();
+            connection.close();
+        } catch (SQLException ex) {
+            System.out.println("erro: " + ex);
+            Logger.getLogger(ItemVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

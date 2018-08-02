@@ -1,5 +1,6 @@
 package Controladores;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -9,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -21,6 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import model.BEAN.Cliente;
 import model.DAO.ClienteDAO;
 
@@ -69,6 +72,10 @@ public class FXML_ClientesController implements Initializable {
     private MenuItem contEditar;
 
     int op = 0;
+    @FXML
+    private MenuItem contInfo;
+    @FXML
+    private AnchorPane anchorPaneClientes;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -193,5 +200,11 @@ public class FXML_ClientesController implements Initializable {
         txt_telefone.setText(tabela_cliente.getSelectionModel().getSelectedItem().getTelefone().getValue());
         txt_conta.setText(tabela_cliente.getSelectionModel().getSelectedItem().getConta().getValue().toString());
         btnSalvar.setText("Editar");
+    }
+
+    @FXML
+    private void on_contInfo() throws IOException {
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/VIEW/FXML_infoCliente.fxml"));
+        anchorPaneClientes.getChildren().setAll(a);
     }
 }

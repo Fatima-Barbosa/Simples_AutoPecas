@@ -1,7 +1,13 @@
 package Controladores;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import static java.time.temporal.TemporalQueries.localDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -9,6 +15,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -16,7 +25,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import model.BEAN.ItemVenda;
 import model.BEAN.vendas;
 import model.DAO.ItemVendaDAO;
@@ -30,7 +41,7 @@ import model.DAO.VendaDAO;
  */
 public class FXML_VendasController implements Initializable {
 
-    vendas v = new vendas();
+    vendas v = new vendas(0.0);
     VendaDAO vdao = new VendaDAO();
     ItemVendaDAO idao = new ItemVendaDAO();
     ProdutoDAO pdao = new ProdutoDAO();
@@ -83,6 +94,10 @@ public class FXML_VendasController implements Initializable {
     private MenuItem menuItemExcluirVenda;
     @FXML
     private JFXButton btnNovaVenda;
+    @FXML
+    private MenuItem cont_RemoverItemVenda;
+    @FXML
+    private MenuItem cont_AlterarQTDItemVenda;
 
     /**
      * Initializes the controller class.
@@ -90,23 +105,25 @@ public class FXML_VendasController implements Initializable {
      * @param url
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        KeyEvent event = null;
-        //A primeira veda é niciada quando inicia a tela, já com total de venda zerada!
-        if (vdao.verificarTotal() != 0) {
-            vendas v = new vendas(0.0);
-            vdao.adicionarVenda(v);
-        }
-//        if (event.getCode() == KeyCode.F1) {
-//             vendas v = new vendas(0.0);
-//            vdao.adicionarVenda(v); 
-//        }
+    public void initialize(URL url, ResourceBundle rb) {        
+        /**
+         * KeyEvent event = null; A primeira veda é niciada quando inicia a
+         * tela, já com total de venda zerada! if (vdao.verificarTotal() != 0) {
+         *
+         * vendas v = new vendas(0.0); vdao.adicionarVenda(v); } if
+         * (event.getCode() == KeyCode.F1) { vendas v = new vendas(0.0);
+         * vdao.adicionarVenda(v); }
+         */
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        txtCod.requestFocus();
+        txtQTD.setText("1");
         //********Tabela Vendas*************//
         colDataVendas.setCellValueFactory(cellData -> cellData.getValue().getDataV());
         colID.setCellValueFactory(cellData -> cellData.getValue().getId().asString());
         colTotalvendas.setCellValueFactory(cellData -> cellData.getValue().getValorTotal().asString());
 
-        DataVendas = vdao.gerarLista();
+        DataVendas = vdao.gerarLista(dateFormat.format(date));
         tabelaVendas.setItems(DataVendas);
 
         //*******Tabela Itens************///
@@ -140,17 +157,33 @@ public class FXML_VendasController implements Initializable {
 
     @FXML
     private void on_vender(ActionEvent event) {
-        VendaDAO v = new VendaDAO();
-        System.out.println("" + v.retornarID());
-        ItemVenda i = new ItemVenda(v.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()), Double.parseDouble(txtTotal.getText()));
-        idao.adicionarItem(i);
-        vdao.atualizarTotal(idao.totalVenda(v.retornarID()), vdao.retornarID());
+        //ItemVenda i = new ItemVenda(v.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()), Double.parseDouble(txtTotal.getText()));
+        if (vdao.verificarTotal() != 0) {
+            if (pdao.verificarEstoque(Integer.parseInt(txtCod.getText())) >= Integer.parseInt(txtQTD.getText())) {
+//                vdao.adicionarVenda(v);
+//                idao.adicionarItem(i);
+            } else {
+                Alert dialogo1 = new Alert(Alert.AlertType.INFORMATION);
+                dialogo1.setTitle("Atenção");
+                dialogo1.setHeaderText("Não há itens suficientes em estoque!"
+                        + "Tente uma quantidade menor!");
+                dialogo1.getButtonTypes().add(ButtonType.OK);
+
+            }
+        }
+        //idao.adicionarItem(i);
+        // vdao.atualizarTotal(idao.totalVenda(v.retornarID()), vdao.retornarID());
         atualizarTabelaItens();
         atualizarTabelaVendas();
     }
 
     @FXML
     private void on_menuItem_novaVenda(ActionEvent event) {
+        atualizarTabelaItens();
+        atualizarTabelaVendas();
+        if (vdao.verificarTotal() != 0) {
+            vdao.adicionarVenda(v);
+        }
     }
 
     @FXML
@@ -181,22 +214,41 @@ public class FXML_VendasController implements Initializable {
     private void onKey_CalcularTotal(KeyEvent event) {
 //        !"".equals(txtQTD.getText())
 //      Pega o evento dentro da textfield QTD
-        VendaDAO v = new VendaDAO();
         if (event.getCode() == KeyCode.ENTER) {
-            Double total = Integer.parseInt(txtQTD.getText()) * Double.parseDouble(txtPrecoU.getText());
-            txtTotal.setText(total.toString());
-            ItemVenda i = new ItemVenda(v.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()), Double.parseDouble(txtTotal.getText()));
-            idao.adicionarItem(i);
-            vdao.atualizarTotal(idao.totalVenda(v.retornarID()), vdao.retornarID());
-            atualizarTabelaVendas();
-            atualizarTabelaItens();
-            LimparCampos();
-            btnNovaVenda.requestFocus();
+            if (pdao.verificarEstoque(Integer.parseInt(txtCod.getText())) >= Integer.parseInt(txtQTD.getText())) {
+                VendaDAO v = new VendaDAO();
+
+                Double total = Integer.parseInt(txtQTD.getText()) * Double.parseDouble(txtPrecoU.getText());
+                txtTotal.setText(total.toString());
+                ItemVenda i = new ItemVenda(v.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()), Double.parseDouble(txtTotal.getText()));
+                idao.adicionarItem(i);
+                vdao.atualizarTotal(idao.totalVenda(v.retornarID()), vdao.retornarID());
+                atualizarTabelaVendas();
+                atualizarTabelaItens();
+                LimparCampos();
+//                txtTotal.requestFocus();
+//                btnNovaVenda.requestFocus();
+            } else {
+                Alert dialogo1 = new Alert(Alert.AlertType.INFORMATION);
+                dialogo1.setTitle("Atenção");
+                dialogo1.setContentText("Não há itens suficientes em estoque!\n"
+                        + "Tente uma quantidade menor!");
+                dialogo1.showAndWait();
+            }
+
         }
+
     }
 
     private void atualizarTabelaVendas() {
-        DataVendas = vdao.gerarLista();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+
+//        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+//        Date hora = Calendar.getInstance().getTime();
+//        String horaformatada = sdf.format(hora);
+        DataVendas = vdao.gerarLista(dateFormat.format(date));
         tabelaVendas.setItems(DataVendas);
     }
 
@@ -234,5 +286,43 @@ public class FXML_VendasController implements Initializable {
         vdao.adicionarVenda(v);
         atualizarTabelaVendas();
         LimparCampos();
+    }
+
+    @FXML
+    private void on_cont_RemoverItemVenda(ActionEvent event) {
+        ItemVenda iv = new ItemVenda();
+        iv.setProduto(tabelaItens.getSelectionModel().getSelectedItem().getProduto());
+        iv.setQtd(tabelaItens.getSelectionModel().getSelectedItem().getQtd());
+        iv.setVenda(tabelaItens.getSelectionModel().getSelectedItem().getVenda());
+        iv.setTotal(tabelaItens.getSelectionModel().getSelectedItem().getTotal());
+        iv.setPreco(tabelaItens.getSelectionModel().getSelectedItem().getPreco());
+        idao.excluir(iv);
+        atualizarTabelaItens();
+        atualizarTabelaVendas();
+    }
+
+    @FXML
+    private void on_cont_AlterarQTDItemVenda(ActionEvent event) {
+    }
+
+    @FXML
+    private void on_ver_itens(MouseEvent event) {
+        DataItem = idao.gerarLista(tabelaVendas.getSelectionModel().getSelectedItem().getId().longValue());
+        tabelaItens.setItems(DataItem);
+    }
+
+    @FXML
+    private void on_keyTotal_addItem(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+//            VendaDAO v = new VendaDAO();
+//            ItemVenda i = new ItemVenda(v.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()), Double.parseDouble(txtTotal.getText()));
+//            idao.adicionarItem(i);
+//            vdao.atualizarTotal(idao.totalVenda(v.retornarID()), vdao.retornarID());
+//            atualizarTabelaVendas();
+//            atualizarTabelaItens();
+//            LimparCampos();
+//            txtTotal.requestFocus();
+//            btnNovaVenda.requestFocus();
+        }
     }
 }
