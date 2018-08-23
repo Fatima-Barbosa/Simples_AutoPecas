@@ -105,7 +105,7 @@ public class FXML_VendasController implements Initializable {
      * @param url
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {        
+    public void initialize(URL url, ResourceBundle rb) {
         /**
          * KeyEvent event = null; A primeira veda é niciada quando inicia a
          * tela, já com total de venda zerada! if (vdao.verificarTotal() != 0) {
@@ -307,8 +307,15 @@ public class FXML_VendasController implements Initializable {
 
     @FXML
     private void on_ver_itens(MouseEvent event) {
-        DataItem = idao.gerarLista(tabelaVendas.getSelectionModel().getSelectedItem().getId().longValue());
-        tabelaItens.setItems(DataItem);
+//        String id = tabelaVendas.getSelectionModel().getSelectedItem().getId().toString();
+//        System.out.println(id);
+        System.out.println("evento: "+event.getClickCount());
+        try {
+            DataItem = idao.gerarLista(tabelaVendas.getSelectionModel().getSelectedItem().getId().longValue());
+            tabelaItens.setItems(DataItem);
+        } catch (Exception e) {
+            System.out.println("não há nada  "+e);
+        }
     }
 
     @FXML

@@ -209,4 +209,65 @@ public class FXML_ProdutosController implements Initializable {
         txt_nome.setText("");
         txt_preco.setText("");
     }
+
+    @FXML
+    private void on_nome_enter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            txt_cod.requestFocus();
+        }
+    }
+
+    @FXML
+    private void on_cod_enter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            txt_descricao.requestFocus();
+        }
+    }
+
+    @FXML
+    private void on_qtd_enter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            txt_preco.requestFocus();
+        }
+    }
+
+    @FXML
+    private void on_preco_enter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (op == 0) {
+                Produto p = new Produto(
+                        txt_nome.getText(),
+                        txt_descricao.getText(),
+                        Double.valueOf(txt_preco.getText()),
+                        txt_cod.getText(),
+                        Integer.valueOf(txt_qtd.getText()));
+
+                dao.Adicionar(p);
+                atualizar();
+                limparCampos();
+
+            } else {
+                Produto c = new Produto(
+                        txt_nome.getText(),
+                        txt_descricao.getText(),
+                        Double.valueOf(txt_preco.getText()),
+                        txt_cod.getText(),
+                        Integer.valueOf(txt_qtd.getText()),
+                        tabelaProdutos.getSelectionModel().getSelectedItem().getId().longValue()
+                );
+                dao.update(c);
+                atualizar();
+                op = 0;
+                btn_salvar.setText("Salvar");
+                limparCampos();
+            }
+        }
+    }
+
+    @FXML
+    private void on_desc_enter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            txt_qtd.requestFocus();
+        }
+    }
 }

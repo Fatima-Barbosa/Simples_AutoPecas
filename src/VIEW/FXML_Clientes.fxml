@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPaneClientes" prefHeight="622.0" prefWidth="1026.0" style="-fx-background-color: #B4CDCD;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_ClientesController">
+<AnchorPane id="AnchorPane" fx:id="anchorPaneClientes" prefHeight="667.0" prefWidth="1157.0" style="-fx-background-color: #B4CDCD;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_ClientesController">
    <children>
-      <TableView fx:id="tabela_cliente" prefHeight="575.0" prefWidth="602.0">
+      <TableView fx:id="tabela_cliente" onMouseClicked="#pegarID" prefHeight="575.0" prefWidth="602.0">
         <columns>
           <TableColumn fx:id="colNome" prefWidth="124.0" text="Nome" />
           <TableColumn fx:id="colCPF" prefWidth="137.0" text="CPF" />
@@ -38,24 +38,20 @@
       </Label>
       <Label layoutX="330.0" layoutY="587.0" text="Pesquisar" textFill="#2980b9">
          <font>
-            <Font name="Calibri Bold" size="14.0" />
+            <Font name="Calibri Bold" size="15.0" />
          </font>
       </Label>
       <TextField fx:id="txtBusc" layoutX="394.0" layoutY="583.0" onKeyPressed="#on_busc" prefHeight="25.0" prefWidth="160.0" AnchorPane.bottomAnchor="14.0" />
       <Button fx:id="btnOk" layoutX="565.0" layoutY="583.0" mnemonicParsing="false" onAction="#on_ok" prefHeight="25.0" prefWidth="36.0" style="-fx-background-color: #2980B9;" text="Ok" textFill="WHITE" />
-      <TextField fx:id="txt_nome" layoutX="631.0" layoutY="124.0" prefHeight="25.0" prefWidth="160.0">
+      <TextField fx:id="txt_nome" layoutX="631.0" layoutY="124.0" onKeyPressed="#on_nome_enter" prefHeight="25.0" prefWidth="160.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="txt_cpf" layoutX="809.0" layoutY="124.0" prefHeight="25.0" prefWidth="187.0">
+      <TextField fx:id="txt_cpf" layoutX="809.0" layoutY="124.0" onKeyPressed="#on_cpf_enter" prefHeight="25.0" prefWidth="187.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="txt_telefone" layoutX="631.0" layoutY="198.0" prefHeight="25.0" prefWidth="160.0">
-         <font>
-            <Font size="14.0" />
-         </font></TextField>
-      <TextField fx:id="txt_conta" layoutX="631.0" layoutY="263.0" prefHeight="25.0" prefWidth="160.0">
+      <TextField fx:id="txt_telefone" layoutX="810.0" layoutY="197.0" onKeyPressed="#on_tel_enter" prefHeight="30.0" prefWidth="187.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
@@ -69,35 +65,24 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="630.0" layoutY="172.0" text="Telefone" textFill="#2980b9">
+      <Label layoutX="810.0" layoutY="166.0" text="Telefone" textFill="#2980b9">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="809.0" layoutY="172.0" text="Endereço" textFill="#2980b9">
+      <Label layoutX="631.0" layoutY="166.0" text="Endereço" textFill="#2980b9">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="633.0" layoutY="236.0" text="Conta" textFill="#2980b9">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <TextArea fx:id="txt_endereco" layoutX="809.0" layoutY="198.0" prefHeight="90.0" prefWidth="187.0">
+      <TextArea fx:id="txt_endereco" layoutX="631.0" layoutY="197.0" onKeyPressed="#on_ender_enter" prefHeight="114.0" prefWidth="160.0">
          <font>
             <Font size="14.0" />
          </font></TextArea>
-      <Button fx:id="btnSalvar" layoutX="809.0" layoutY="311.0" mnemonicParsing="false" onAction="#on_Salvar" prefHeight="30.0" prefWidth="187.0" style="-fx-background-color: #2980B9;" text="Salvar" textFill="WHITE">
+      <Button fx:id="btnSalvar" layoutX="809.0" layoutY="254.0" mnemonicParsing="false" onAction="#on_Salvar" prefHeight="30.0" prefWidth="187.0" style="-fx-background-color: #2980B9;" text="Salvar" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="16.0" />
          </font>
       </Button>
-      <TableView layoutX="629.0" layoutY="375.0" prefHeight="200.0" prefWidth="365.0">
-        <columns>
-          <TableColumn prefWidth="184.0" text="Data da Compra" />
-          <TableColumn minWidth="0.0" prefWidth="180.0" text="Valor da Compra" />
-        </columns>
-      </TableView>
    </children>
 </AnchorPane>

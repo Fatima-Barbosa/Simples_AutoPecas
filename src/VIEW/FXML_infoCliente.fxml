@@ -1,56 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="622.0" prefWidth="1026.0" style="-fx-background-color: #B4CDCD;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_infoClienteController">
+<AnchorPane id="AnchorPane" prefHeight="667.0" prefWidth="1157.0" style="-fx-background-color: #B4CDCD;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_infoClienteController">
    <children>
       <Label layoutX="50.0" layoutY="41.0" text="Dados do cliente" textFill="#2980b9">
          <font>
             <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="141.0" text="Nome:" textFill="#2980b9">
+      <Label fx:id="labelNome" layoutX="50.0" layoutY="141.0" text="Nome:" textFill="#2980b9">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="179.0" text="Telefone:" textFill="#2980b9">
+      <Label fx:id="labelTel" layoutX="50.0" layoutY="179.0" text="Telefone:" textFill="#2980b9">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="52.0" layoutY="217.0" text="CPF:" textFill="#2980b9">
+      <Label fx:id="labelCPF" layoutX="52.0" layoutY="217.0" text="CPF:" textFill="#2980b9">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="53.0" layoutY="254.0" text="Endereço:" textFill="#2980b9">
+      <Label fx:id="labelEnder" layoutX="53.0" layoutY="254.0" text="Endereço:" textFill="#2980b9">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TableView fx:id="tabela_compras" layoutX="458.0" layoutY="26.0" prefHeight="543.0" prefWidth="549.0">
+      <TableView fx:id="tabela_compras" layoutX="463.0" layoutY="180.0" prefHeight="422.0" prefWidth="549.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="463.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="180.0">
         <columns>
-          <TableColumn fx:id="colData" prefWidth="299.0" text="Data da compra" />
-          <TableColumn fx:id="colValor" prefWidth="249.0" text="Valor da compra" />
+          <TableColumn fx:id="colData" prefWidth="111.0" text="Data da compra" />
+          <TableColumn fx:id="colValor" prefWidth="122.0" text="Valor da compra" />
+            <TableColumn fx:id="colDescricao" prefWidth="249.0" text="Descrição" />
+            <TableColumn fx:id="colID" prefWidth="66.0" text="ID" />
         </columns>
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem fx:id="contextEditar" mnemonicParsing="false" onAction="#on_editar" text="Editar" />
+                  <MenuItem fx:id="contextEcluir" mnemonicParsing="false" onAction="#on_excluir" text="Excluir" />
+                  <MenuItem fx:id="contextAV" mnemonicParsing="false" onAction="#on_av" text="AV" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
       </TableView>
-      <Label fx:id="labelTotal" layoutX="53.0" layoutY="538.0" text="Total da divida:" textFill="#2980b9">
+      <Label fx:id="labelTotal" layoutX="53.0" layoutY="546.0" text="Valor total:" textFill="#2980b9" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="53.0">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Label layoutX="751.0" layoutY="588.0" text="Pesquisar" textFill="#2980b9">
+      <TextField fx:id="txtDescricao" layoutX="463.0" layoutY="104.0" onKeyPressed="#on_desc_enter" prefHeight="31.0" prefWidth="194.0" AnchorPane.leftAnchor="463.0" AnchorPane.rightAnchor="369.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtValor" layoutX="669.0" layoutY="104.0" onKeyPressed="#checValor" prefHeight="25.0" prefWidth="175.0" AnchorPane.rightAnchor="182.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <JFXButton fx:id="btnAdicinar" layoutX="872.0" layoutY="104.0" onAction="#on_addConta" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: #2980b9; -fx-background-radius: 15px;" text="Adicionar" textFill="WHITE" AnchorPane.rightAnchor="17.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
+      </JFXButton>
+      <Label fx:id="labelTotal1" layoutX="463.0" layoutY="61.0" text="Descrição" textFill="#2980b9" AnchorPane.leftAnchor="463.0" AnchorPane.rightAnchor="468.0">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
       </Label>
-      <JFXDatePicker fx:id="dataPiker" defaultColor="#2a81b8" layoutX="834.0" layoutY="583.0" />
+      <Label fx:id="labelTotal11" layoutX="669.0" layoutY="65.0" prefHeight="31.0" prefWidth="58.0" text="Valor" textFill="#2980b9" AnchorPane.rightAnchor="299.0">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

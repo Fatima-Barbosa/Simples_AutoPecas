@@ -17,7 +17,7 @@ public class SistemaAutoPecas extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/VIEW/FXML_Inicio.fxml"));
         
         Scene scene = new Scene(root);
-        //stage.setResizable(false);
+        stage.setResizable(false);
         //stage.setMaximized(true);
 //        if(stage.isMaximized()){
 //            System.out.println("ok");

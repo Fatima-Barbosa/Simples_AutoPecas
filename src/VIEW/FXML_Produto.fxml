@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorPane_Vendas" prefHeight="622.0" prefWidth="1026.0" style="-fx-background-color: #B4CDCD;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_ProdutosController">
+<AnchorPane id="AnchorPane" fx:id="AnchorPane_Vendas" prefHeight="667.0" prefWidth="1157.0" style="-fx-background-color: #B4CDCD;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_ProdutosController">
    <children>
       <Label layoutX="609.0" layoutY="14.0" text="Produtos" textFill="#2980b9" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="14.0">
          <font>
@@ -47,11 +47,11 @@
             <Font name="Calibri Bold" size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="txt_nome" layoutX="636.0" layoutY="128.0" prefHeight="25.0" prefWidth="172.0" AnchorPane.rightAnchor="218.0">
+      <TextField fx:id="txt_nome" layoutX="636.0" layoutY="128.0" onKeyPressed="#on_nome_enter" prefHeight="25.0" prefWidth="172.0" AnchorPane.rightAnchor="218.0">
          <font>
             <Font size="13.0" />
          </font></TextField>
-      <TextField fx:id="txt_cod" layoutX="841.0" layoutY="128.0" prefHeight="25.0" prefWidth="160.0" AnchorPane.rightAnchor="25.0">
+      <TextField fx:id="txt_cod" layoutX="841.0" layoutY="128.0" onKeyPressed="#on_cod_enter" prefHeight="25.0" prefWidth="160.0" AnchorPane.rightAnchor="25.0">
          <font>
             <Font size="13.0" />
          </font></TextField>
@@ -65,11 +65,11 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txt_qtd" layoutX="841.0" layoutY="199.0" prefHeight="25.0" prefWidth="160.0" AnchorPane.rightAnchor="25.0">
+      <TextField fx:id="txt_qtd" layoutX="841.0" layoutY="199.0" onKeyPressed="#on_qtd_enter" prefHeight="25.0" prefWidth="160.0" AnchorPane.rightAnchor="25.0">
          <font>
             <Font size="13.0" />
          </font></TextField>
-      <TextField fx:id="txt_preco" layoutX="841.0" layoutY="263.0" prefHeight="25.0" prefWidth="160.0" AnchorPane.rightAnchor="25.0">
+      <TextField fx:id="txt_preco" layoutX="841.0" layoutY="263.0" onKeyPressed="#on_preco_enter" prefHeight="25.0" prefWidth="160.0" AnchorPane.rightAnchor="25.0">
          <font>
             <Font size="13.0" />
          </font></TextField>
@@ -78,7 +78,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextArea fx:id="txt_descricao" layoutX="636.0" layoutY="199.0" prefHeight="93.0" prefWidth="172.0" AnchorPane.rightAnchor="218.0">
+      <TextArea fx:id="txt_descricao" layoutX="636.0" layoutY="199.0" onKeyPressed="#on_desc_enter" prefHeight="93.0" prefWidth="172.0" AnchorPane.rightAnchor="218.0">
          <font>
             <Font size="13.0" />
          </font></TextArea>

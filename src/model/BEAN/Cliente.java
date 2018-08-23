@@ -9,30 +9,39 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Fátima
  */
 public class Cliente {
+
     private SimpleStringProperty nome;
     private SimpleStringProperty cpf;
     private SimpleStringProperty endereco;
     private SimpleStringProperty telefone;
     private SimpleDoubleProperty conta;
     private SimpleLongProperty id;
+    
 
     public Cliente() {
     }
 
-    public Cliente(String nome, String cpf, String endereco, String telefone, Double conta) {
+    public Cliente(String nome, String cpf, String endereco, String telefone) {
         this.nome = new SimpleStringProperty(nome);
         this.cpf = new SimpleStringProperty(cpf);
         this.endereco = new SimpleStringProperty(endereco);
         this.telefone = new SimpleStringProperty(telefone);
-        this.conta = new SimpleDoubleProperty(conta);
     }
 
-    public Cliente(String nome, String cpf, String endereco, String telefone, Double conta, Long id) {
+    public Cliente(String nome, String cpf, String endereco, String telefone, double conta, Long id) {
         this.nome = new SimpleStringProperty(nome);
         this.cpf = new SimpleStringProperty(cpf);
         this.endereco = new SimpleStringProperty(endereco);
         this.telefone = new SimpleStringProperty(telefone);
         this.conta = new SimpleDoubleProperty(conta);
+        this.id = new SimpleLongProperty(id);
+    }
+
+    public Cliente(String nome, String cpf, String endereco, String telefone, Long id) {
+        this.nome = new SimpleStringProperty(nome);
+        this.cpf = new SimpleStringProperty(cpf);
+        this.endereco = new SimpleStringProperty(endereco);
+        this.telefone = new SimpleStringProperty(telefone);
         this.id = new SimpleLongProperty(id);
     }
     
@@ -83,7 +92,10 @@ public class Cliente {
     public void setId(SimpleLongProperty id) {
         this.id = id;
     }
-    
-    
+
+
+
+
+
     
 }

@@ -30,7 +30,7 @@ public class ProdutoDAO {
 
         sql = "insert into produtos(nome, descricao, preco, codBarra, qtd) values(?,?,?,?,?)";
         try {
-            stmt = connection.prepareCall(sql);
+            stmt = connection.prepareStatement(sql);
             stmt.setString(1, p.getNome().getValue());
             stmt.setString(2, p.getDescricao().getValue());
             stmt.setDouble(3, p.getPreco().getValue());

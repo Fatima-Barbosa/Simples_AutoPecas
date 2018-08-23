@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.BEAN.Cliente;
-
+import model.BEAN.Conta;
 /**
  *
  * @author Fátima
@@ -34,7 +34,7 @@ public class ClienteDAO {
             stmt.setString(2, c.getCpf().getValue());
             stmt.setString(3, c.getEndereco().getValue());
             stmt.setString(4, c.getTelefone().getValue());
-            stmt.setDouble(5, c.getConta().getValue());
+            stmt.setDouble(5, 0);
             stmt.execute();
             System.out.println("Adicionado com sucesso!");
             stmt.close();
@@ -70,6 +70,8 @@ public class ClienteDAO {
         }
         return Lista;
     }
+    
+
 
     public void remover(long id) throws SQLException {
         connection = new ConnectionFactory().getConnection();
@@ -89,18 +91,38 @@ public class ClienteDAO {
         connection = new ConnectionFactory().getConnection();
 
         try {
-            stmt = connection.prepareStatement("UPDATE clientes SET nome = ?, cpf = ?, endereco = ?, telefone = ?, conta = ? WHERE id = ?;");
+            stmt = connection.prepareStatement("UPDATE clientes SET nome = ?, cpf = ?, endereco = ?, telefone = ? WHERE id = ?;");
             stmt.setString(1, c.getNome().getValue());
             stmt.setString(2, c.getCpf().getValue());
             stmt.setString(3, c.getEndereco().getValue());
             stmt.setString(4, c.getTelefone().getValue());
-            stmt.setDouble(5, c.getConta().getValue());
-            stmt.setLong(6, c.getId().longValue());
+//            stmt.setDouble(5, c.getConta().getValue());
+            stmt.setLong(5, c.getId().longValue());
             stmt.executeUpdate();
             connection.close();
             stmt.close();
             System.out.println("\n Clinte Atualizado!\n");
         } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateSoma(long id) {
+        connection = new ConnectionFactory().getConnection();
+        
+        ContaDAO conta = new ContaDAO();
+        conta.atualizar(id);
+
+        try {
+            stmt = connection.prepareStatement("UPDATE clientes SET conta = ? WHERE id = ?;");
+            stmt.setDouble(1, conta.atualizar(id));
+            stmt.setLong(2, id);
+            stmt.executeUpdate();
+            connection.close();
+            stmt.close();
+            System.out.println("\n Conta Atualizada!\n");
+        } catch (SQLException ex) {
+            System.out.println("erro: " + ex);
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -131,6 +153,33 @@ public class ClienteDAO {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return Lista;
+    }
+    
+        public Cliente retornarCliente(long id) {
+        connection = new ConnectionFactory().getConnection();
+        Cliente c = new Cliente();
+
+        try {
+            stmt = connection.prepareStatement("select * from clientes where id = ?;");
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                c = new Cliente(
+                        rs.getString("nome"),
+                        rs.getString("cpf"),
+                        rs.getString("endereco"),
+                        rs.getString("telefone"),
+                        rs.getDouble("conta"),
+                        rs.getLong("id")
+                );
+                
+            }
+            stmt.close();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return c;
     }
 
 }

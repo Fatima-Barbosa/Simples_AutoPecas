@@ -23,6 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.BEAN.Cliente;
 import model.DAO.ClienteDAO;
@@ -34,6 +35,7 @@ import model.DAO.ClienteDAO;
  */
 public class FXML_ClientesController implements Initializable {
 
+    static int id;
     ClienteDAO dao = new ClienteDAO();
     @FXML
     private TableView<Cliente> tabela_cliente;
@@ -57,8 +59,6 @@ public class FXML_ClientesController implements Initializable {
     private TextField txt_cpf;
     @FXML
     private TextField txt_telefone;
-    @FXML
-    private TextField txt_conta;
     @FXML
     private TextArea txt_endereco;
     @FXML
@@ -101,7 +101,6 @@ public class FXML_ClientesController implements Initializable {
         assert txt_nome != null : "fx:id=\"txt_nome\" was not injected: check your FXML file 'FXML_Clientes.fxml'.";
         assert txt_cpf != null : "fx:id=\"txt_cpf\" was not injected: check your FXML file 'FXML_Clientes.fxml'.";
         assert txt_telefone != null : "fx:id=\"txt_telefone\" was not injected: check your FXML file 'FXML_Clientes.fxml'.";
-        assert txt_conta != null : "fx:id=\"txt_conta\" was not injected: check your FXML file 'FXML_Clientes.fxml'.";
         assert txt_endereco != null : "fx:id=\"txt_endereco\" was not injected: check your FXML file 'FXML_Clientes.fxml'.";
         assert btnSalvar != null : "fx:id=\"btnSalvar\" was not injected: check your FXML file 'FXML_Clientes.fxml'.";
     }
@@ -127,8 +126,7 @@ public class FXML_ClientesController implements Initializable {
                     txt_nome.getText(),
                     txt_cpf.getText(),
                     txt_endereco.getText(),
-                    txt_telefone.getText(),
-                    Double.valueOf(txt_conta.getText())
+                    txt_telefone.getText()
             );
             dao.adicionar(c);
             limparCampos();
@@ -139,7 +137,6 @@ public class FXML_ClientesController implements Initializable {
                     txt_cpf.getText(),
                     txt_endereco.getText(),
                     txt_telefone.getText(),
-                    Double.valueOf(txt_conta.getText()),
                     tabela_cliente.getSelectionModel().getSelectedItem().getId().longValue()
             );
             dao.update(c);
@@ -151,7 +148,6 @@ public class FXML_ClientesController implements Initializable {
     }
 
     public void limparCampos() {
-        txt_conta.setText("");
         txt_cpf.setText("");
         txt_endereco.setText("");
         txt_nome.setText("");
@@ -198,13 +194,79 @@ public class FXML_ClientesController implements Initializable {
         txt_cpf.setText(tabela_cliente.getSelectionModel().getSelectedItem().getCpf().getValue());
         txt_endereco.setText(tabela_cliente.getSelectionModel().getSelectedItem().getEndereco().getValue());
         txt_telefone.setText(tabela_cliente.getSelectionModel().getSelectedItem().getTelefone().getValue());
-        txt_conta.setText(tabela_cliente.getSelectionModel().getSelectedItem().getConta().getValue().toString());
         btnSalvar.setText("Editar");
     }
 
     @FXML
     private void on_contInfo() throws IOException {
+
         AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/VIEW/FXML_infoCliente.fxml"));
         anchorPaneClientes.getChildren().setAll(a);
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @FXML
+    private void pegarID(MouseEvent event) {
+        setId(tabela_cliente.getSelectionModel().getSelectedItem().getId().intValue());
+        System.out.println("id:" + id);
+    }
+
+    @FXML
+    private void on_nome_enter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            txt_cpf.requestFocus();
+        }
+    }
+
+    @FXML
+    private void on_cpf_enter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            txt_telefone.requestFocus();
+        }
+    }
+
+    @FXML
+    private void on_tel_enter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            txt_endereco.requestFocus();
+        }
+    }
+
+    @FXML
+    private void on_ender_enter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            if (op == 0) {
+                Cliente c = new Cliente(
+                        txt_nome.getText(),
+                        txt_cpf.getText(),
+                        txt_endereco.getText(),
+                        txt_telefone.getText()
+                );
+                dao.adicionar(c);
+                limparCampos();
+                atualizarTabela();
+            } else {
+                Cliente c = new Cliente(
+                        txt_nome.getText(),
+                        txt_cpf.getText(),
+                        txt_endereco.getText(),
+                        txt_telefone.getText(),
+                        tabela_cliente.getSelectionModel().getSelectedItem().getId().longValue()
+                );
+                dao.update(c);
+                limparCampos();
+                op = 0;
+                btnSalvar.setText("Salvar");
+                atualizarTabela();
+            }
+        }
+    }
+
 }
