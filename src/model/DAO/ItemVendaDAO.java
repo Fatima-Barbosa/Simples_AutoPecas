@@ -97,6 +97,7 @@ public class ItemVendaDAO {
         connection = new ConnectionFactory().getConnection();
         sql = "UPDATE item_venda SET venda = ?, produto = ?, qtd = ?, preco = ?, valorTotal = ? WHERE id = ?;";
         try {
+            pdao.baixaQTD(iv.getQtd().getValue(), iv.getProduto().getValue());
             stmt = connection.prepareStatement(sql);
             stmt.setLong(1, iv.getVenda().getValue());
             stmt.setLong(2, iv.getProduto().getValue());

@@ -70,26 +70,26 @@ public class ProdutoDAO {
 
         return Lista;
     }
-    
-    public int verificarEstoque(int cod){
+
+    public int verificarEstoque(int cod) {
         int qtd = 0;
         connection = new ConnectionFactory().getConnection();
         sql = "SELECT * FROM produtos where codBarra = ?;";
-                try {
+        try {
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, cod);
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 qtd = rs.getInt("qtd");
             }
         } catch (SQLException ex) {
-            System.out.println("Erro: "+ex);
+            System.out.println("Erro: " + ex);
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return qtd;
     }
 
-    public long pegarID(String cod){
+    public long pegarID(String cod) {
         Long id = null;
         connection = new ConnectionFactory().getConnection();
         sql = "SELECT * FROM produtos where codBarra = ?;";
@@ -97,17 +97,35 @@ public class ProdutoDAO {
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, cod);
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 id = rs.getLong("id");
             }
         } catch (SQLException ex) {
-            System.out.println("Erro: "+ex);
+            System.out.println("Erro: " + ex);
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
     }
-    
-    public Double pegarPreco(String cod){
+
+    public String pegarCodigo(Long cod) {
+        String codigo = null;
+        connection = new ConnectionFactory().getConnection();
+        sql = "SELECT * FROM produtos where id = ?;";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, cod);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                codigo = rs.getString("codBarra");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro: " + ex);
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return codigo;
+    }
+
+    public Double pegarPreco(String cod) {
         Double total = null;
         connection = new ConnectionFactory().getConnection();
         sql = "SELECT * FROM produtos where codBarra = ?";
@@ -115,16 +133,16 @@ public class ProdutoDAO {
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, cod);
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 total = rs.getDouble("preco");
             }
         } catch (SQLException ex) {
-            System.out.println("Erro: "+ex);
+            System.out.println("Erro: " + ex);
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return total;
     }
-    
+
     public ObservableList<Produto> FiltrarLista(String n) {
         connection = new ConnectionFactory().getConnection();
         ObservableList<Produto> Lista
@@ -185,7 +203,7 @@ public class ProdutoDAO {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void updateQTD(int qtd, long id) {
         connection = new ConnectionFactory().getConnection();
 
@@ -201,7 +219,7 @@ public class ProdutoDAO {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void baixaQTD(int qtd, long id) {
         connection = new ConnectionFactory().getConnection();
         sql = "UPDATE produtos SET qtd = qtd - ? WHERE id = ?;";

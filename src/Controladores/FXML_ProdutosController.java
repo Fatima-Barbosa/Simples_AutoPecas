@@ -137,6 +137,7 @@ public class FXML_ProdutosController implements Initializable {
             limparCampos();
 
         } else {
+
             Produto c = new Produto(
                     txt_nome.getText(),
                     txt_descricao.getText(),
@@ -155,45 +156,54 @@ public class FXML_ProdutosController implements Initializable {
 
     @FXML
     private void on_Editar(ActionEvent event) {
-        op = 1;
-        txt_cod.setText(tabelaProdutos.getSelectionModel().getSelectedItem().getCodBarra().getValue());
-        txt_nome.setText(tabelaProdutos.getSelectionModel().getSelectedItem().getNome().getValue());
-        txt_preco.setText(tabelaProdutos.getSelectionModel().getSelectedItem().getPreco().getValue().toString());
-        txt_qtd.setText(tabelaProdutos.getSelectionModel().getSelectedItem().getQtd().getValue().toString());
-        txt_descricao.setText(dao.PegarDescricao(tabelaProdutos.getSelectionModel().getSelectedItem().getId().getValue()));
-        btn_salvar.setText("Editar");
+        try {
+            op = 1;
+            txt_cod.setText(tabelaProdutos.getSelectionModel().getSelectedItem().getCodBarra().getValue());
+            txt_nome.setText(tabelaProdutos.getSelectionModel().getSelectedItem().getNome().getValue());
+            txt_preco.setText(tabelaProdutos.getSelectionModel().getSelectedItem().getPreco().getValue().toString());
+            txt_qtd.setText(tabelaProdutos.getSelectionModel().getSelectedItem().getQtd().getValue().toString());
+            txt_descricao.setText(dao.PegarDescricao(tabelaProdutos.getSelectionModel().getSelectedItem().getId().getValue()));
+            btn_salvar.setText("Editar");
+        } catch (Exception e) {
+            System.out.println("erro: " + e);
+        }
+
     }
 
     @FXML
     private void on_excluir(ActionEvent event) {
-        boolean r = false;
         try {
 
-            Alert dialogo1 = new Alert(Alert.AlertType.CONFIRMATION);
-            //mensagem de confirmaçao para excluir
-            dialogo1.setTitle("Atenção");
-            dialogo1.setHeaderText("Deseja realmente excluir o item: " + tabelaProdutos.getSelectionModel().getSelectedItem().getNome().getValue() + "?");
-            dialogo1.getButtonTypes().add(ButtonType.YES);
-            ButtonType btn = new ButtonType("Sim", ButtonBar.ButtonData.YES);
-            ButtonType btn1 = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
-            dialogo1.getButtonTypes().setAll(btn, btn1);
-            r = dialogo1.showAndWait().get().equals(btn);
+            boolean r = false;
+            try {
 
-            if (r) {
-                dao.remover(tabelaProdutos.getSelectionModel().getSelectedItem().getId().longValue());
-                atualizar();
+                Alert dialogo1 = new Alert(Alert.AlertType.CONFIRMATION);
+                //mensagem de confirmaçao para excluir
+                dialogo1.setTitle("Atenção");
+                dialogo1.setHeaderText("Deseja realmente excluir o item: " + tabelaProdutos.getSelectionModel().getSelectedItem().getNome().getValue() + "?");
+                dialogo1.getButtonTypes().add(ButtonType.YES);
+                ButtonType btn = new ButtonType("Sim", ButtonBar.ButtonData.YES);
+                ButtonType btn1 = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+                dialogo1.getButtonTypes().setAll(btn, btn1);
+                r = dialogo1.showAndWait().get().equals(btn);
+
+                if (r) {
+                    dao.remover(tabelaProdutos.getSelectionModel().getSelectedItem().getId().longValue());
+                    atualizar();
+                    Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
+                    dialogo.setTitle("Item excluido!");
+                    dialogo.setHeaderText("Operaçao bem sucedida!");
+                    dialogo.showAndWait();
+                }
+
+            } catch (SQLException ex) {
                 Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
-                dialogo.setTitle("Item excluido!");
-                dialogo.setHeaderText("Operaçao bem sucedida!");
+                dialogo.setTitle("Não foi possivel realizar a operação!");
+                dialogo.setHeaderText("erro!");
                 dialogo.showAndWait();
+                Logger.getLogger(FXML_ProdutosController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (SQLException ex) {
-            Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
-            dialogo.setTitle("Não foi possivel realizar a operação!");
-            dialogo.setHeaderText("erro!");
-            dialogo.showAndWait();
-            Logger.getLogger(FXML_ProdutosController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
         }
     }
 

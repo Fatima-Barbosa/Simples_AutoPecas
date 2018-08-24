@@ -189,19 +189,28 @@ public class FXML_ClientesController implements Initializable {
 
     @FXML
     private void on_contEditar(ActionEvent event) {
-        op = 1;
-        txt_nome.setText(tabela_cliente.getSelectionModel().getSelectedItem().getNome().getValue());
-        txt_cpf.setText(tabela_cliente.getSelectionModel().getSelectedItem().getCpf().getValue());
-        txt_endereco.setText(tabela_cliente.getSelectionModel().getSelectedItem().getEndereco().getValue());
-        txt_telefone.setText(tabela_cliente.getSelectionModel().getSelectedItem().getTelefone().getValue());
-        btnSalvar.setText("Editar");
+        try {
+            op = 1;
+            txt_nome.setText(tabela_cliente.getSelectionModel().getSelectedItem().getNome().getValue());
+            txt_cpf.setText(tabela_cliente.getSelectionModel().getSelectedItem().getCpf().getValue());
+            txt_endereco.setText(tabela_cliente.getSelectionModel().getSelectedItem().getEndereco().getValue());
+            txt_telefone.setText(tabela_cliente.getSelectionModel().getSelectedItem().getTelefone().getValue());
+            btnSalvar.setText("Editar");
+        } catch (Exception e) {
+            System.out.println("erro: " + e);
+        }
+
     }
 
     @FXML
     private void on_contInfo() throws IOException {
+        try {
+            AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/VIEW/FXML_infoCliente.fxml"));
+            anchorPaneClientes.getChildren().setAll(a);
+        } catch (IOException e) {
+            System.out.println("erro: "+e);
+        }
 
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/VIEW/FXML_infoCliente.fxml"));
-        anchorPaneClientes.getChildren().setAll(a);
     }
 
     public int getId() {
@@ -214,8 +223,13 @@ public class FXML_ClientesController implements Initializable {
 
     @FXML
     private void pegarID(MouseEvent event) {
-        setId(tabela_cliente.getSelectionModel().getSelectedItem().getId().intValue());
-        System.out.println("id:" + id);
+        try {
+            setId(tabela_cliente.getSelectionModel().getSelectedItem().getId().intValue());
+            System.out.println("id:" + id);
+        } catch (Exception e) {
+            System.out.println("erro: " + e);
+        }
+
     }
 
     @FXML
