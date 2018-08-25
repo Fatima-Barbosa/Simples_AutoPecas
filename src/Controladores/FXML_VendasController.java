@@ -161,11 +161,14 @@ public class FXML_VendasController implements Initializable {
 
     @FXML
     private void on_vender(ActionEvent event) {
-        //ItemVenda i = new ItemVenda(v.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()), Double.parseDouble(txtTotal.getText()));
+        ItemVenda iv = new ItemVenda(vdao.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()),(Integer.parseInt(txtQTD.getText())*Double.parseDouble(txtPrecoU.getText())));
         if (vdao.verificarTotal() != 0) {
             if (pdao.verificarEstoque(Integer.parseInt(txtCod.getText())) >= Integer.parseInt(txtQTD.getText())) {
-//                vdao.adicionarVenda(v);
-//                idao.adicionarItem(i);
+                vdao.atualizarTotal(Double.NaN, Long.MIN_VALUE);
+                idao.adicionarItem(iv);
+                vdao.atualizarTotal(idao.totalVenda(vdao.retornarID()), vdao.retornarID());
+                atualizarTabelaItens();
+                atualizarTabelaVendas();
             } else {
                 Alert dialogo1 = new Alert(Alert.AlertType.INFORMATION);
                 dialogo1.setTitle("Atenção");
@@ -291,6 +294,7 @@ public class FXML_VendasController implements Initializable {
             vendas v = new vendas(0.0);
             vdao.adicionarVenda(v);
             atualizarTabelaVendas();
+            atualizarTabelaItens();
             LimparCampos();
         }
     }
