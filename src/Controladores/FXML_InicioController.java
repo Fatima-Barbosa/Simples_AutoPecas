@@ -20,10 +20,8 @@ public class FXML_InicioController implements Initializable {
     private JFXButton btnVendas;
     @FXML
     private JFXButton bntEstoque;
-    @FXML
-    private JFXButton bntGraficos;
-    @FXML
-    private JFXButton bntRelatorios;
+//    private JFXButton bntGraficos;
+//    private JFXButton bntRelatorios;
     @FXML
     public AnchorPane AnchorPaneMae;
     @FXML
@@ -34,8 +32,8 @@ public class FXML_InicioController implements Initializable {
         // TODO
         assert btnVendas != null : "fx:id=\"btnVendas\" was not injected: check your FXML file 'FXML_Inicio.fxml'.";
         assert bntEstoque != null : "fx:id=\"bntEstoque\" was not injected: check your FXML file 'FXML_Inicio.fxml'.";
-        assert bntGraficos != null : "fx:id=\"bntGraficos\" was not injected: check your FXML file 'FXML_Inicio.fxml'.";
-        assert bntRelatorios != null : "fx:id=\"bntRelatorios\" was not injected: check your FXML file 'FXML_Inicio.fxml'.";
+//        assert bntGraficos != null : "fx:id=\"bntGraficos\" was not injected: check your FXML file 'FXML_Inicio.fxml'.";
+//        assert bntRelatorios != null : "fx:id=\"bntRelatorios\" was not injected: check your FXML file 'FXML_Inicio.fxml'.";
         assert btnClientes != null : "fx:id=\"btnClientes\" was not injected: check your FXML file 'FXML_Inicio.fxml'.";
         assert AnchorPaneMae != null : "fx:id=\"AnchorPaneMae\" was not injected: check your FXML file 'FXML_Inicio.fxml'.";
 
@@ -55,13 +53,6 @@ public class FXML_InicioController implements Initializable {
         AnchorPaneMae.getChildren().setAll(a);
     }
 
-    @FXML
-    private void ActionGraficos(ActionEvent event) {
-    }
-
-    @FXML
-    private void ActionRelatorios(ActionEvent event) {
-    }
 
     @FXML
     private void ActionClientes() throws IOException {
