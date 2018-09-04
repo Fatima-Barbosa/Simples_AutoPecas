@@ -60,6 +60,7 @@ public class VendaDAO {
             Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     public void atualizarTotal(Double t, Long id){
         connection = new ConnectionFactory().getConnection();
         sql = "UPDATE venda SET valorTotal = ? WHERE id = ?;";
@@ -72,7 +73,7 @@ public class VendaDAO {
             stmt.close();
             connection.close();
         } catch (SQLException ex) {
-            System.out.println("Erro :"+ex);
+            System.out.println("Erro atualizarTotal de venda:"+ex);
             Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -88,7 +89,7 @@ public class VendaDAO {
             stmt.close();
             connection.close();
         } catch (SQLException ex) {
-            System.out.println("Erro :"+ex);
+            System.out.println("Erro no atualizarTotalRemovido de venda:"+ex);
             Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -104,7 +105,7 @@ public class VendaDAO {
             stmt.close();
             connection.close();
         } catch (SQLException ex) {
-            System.out.println("Erro :"+ex);
+            System.out.println("Erro no atualizar de venda :"+ex);
             Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

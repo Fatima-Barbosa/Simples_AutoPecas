@@ -43,7 +43,7 @@ public class ItemVendaDAO {
             stmt.close();
             connection.close();
         } catch (SQLException ex) {
-            System.out.println("erro : " + ex);
+            System.out.println("erro no add do item : " + ex);
             Logger.getLogger(ItemVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -110,7 +110,7 @@ public class ItemVendaDAO {
             stmt.close();
             connection.close();
         } catch (SQLException ex) {
-            System.out.println("erro: " + ex);
+            System.out.println("erro atualizar item: " + ex);
             Logger.getLogger(ItemVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

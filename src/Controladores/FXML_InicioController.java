@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import model.BEAN.vendas;
+import model.DAO.VendaDAO;
 
 /**
  *
@@ -26,7 +28,6 @@ public class FXML_InicioController implements Initializable {
     public AnchorPane AnchorPaneMae;
     @FXML
     private JFXButton btnClientes;
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

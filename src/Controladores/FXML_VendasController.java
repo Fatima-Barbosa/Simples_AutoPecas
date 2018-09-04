@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import static java.time.temporal.TemporalQueries.localDate;
@@ -109,12 +110,10 @@ public class FXML_VendasController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         /**
          * KeyEvent event = null; A primeira veda é niciada quando inicia a
-         * tela, já com total de venda zerada! if (vdao.verificarTotal() != 0) {
-         *
-         * vendas v = new vendas(0.0); vdao.adicionarVenda(v); } if
-         * (event.getCode() == KeyCode.F1) { vendas v = new vendas(0.0);
-         * vdao.adicionarVenda(v); }
+         * tela, já com total de venda zerada! *
          */
+            vendas vi = new vendas(0.0);
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         txtCod.requestFocus();
@@ -133,10 +132,9 @@ public class FXML_VendasController implements Initializable {
         colProduto.setCellValueFactory(cellData -> cellData.getValue().getProduto().asString());
         colQTD.setCellValueFactory(cellData -> cellData.getValue().getQtd().asString());
         colTotal.setCellValueFactory(cellData -> cellData.getValue().getTotal().asString());
-        
+
 //        DataItem = idao.gerarLista(vdao.retornarID());
 //        tabelaItens.setItems(DataItem);
-
         assert AnchorPane_Vendas != null : "fx:id=\"AnchorPane_Vendas\" was not injected: check your FXML file 'FXML_Vendas.fxml'.";
         assert txtCod != null : "fx:id=\"txtCod\" was not injected: check your FXML file 'FXML_Vendas.fxml'.";
         assert txtPrecoU != null : "fx:id=\"txtPrecoU\" was not injected: check your FXML file 'FXML_Vendas.fxml'.";
@@ -161,7 +159,12 @@ public class FXML_VendasController implements Initializable {
 
     @FXML
     private void on_vender(ActionEvent event) {
-        ItemVenda iv = new ItemVenda(vdao.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()),(Integer.parseInt(txtQTD.getText())*Double.parseDouble(txtPrecoU.getText())));
+//        try {
+            ItemVenda iv = new ItemVenda(vdao.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()), (Integer.parseInt(txtQTD.getText()) * Double.parseDouble(txtPrecoU.getText())));
+//        } catch (NumberFormatException e) {
+//            System.out.println("Nao há uma venda criada"+e);
+//        }
+
         if (vdao.verificarTotal() != 0) {
             if (pdao.verificarEstoque(Integer.parseInt(txtCod.getText())) >= Integer.parseInt(txtQTD.getText())) {
                 vdao.atualizarTotal(Double.NaN, Long.MIN_VALUE);
@@ -225,10 +228,10 @@ public class FXML_VendasController implements Initializable {
             if (pdao.verificarEstoque(Integer.parseInt(txtCod.getText())) >= Integer.parseInt(txtQTD.getText())) {
                 if (op == 1) {
                     ItemVenda iv = new ItemVenda(
-                            tabelaItens.getSelectionModel().getSelectedItem().getVenda().getValue(), 
-                            tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue(), 
-                            Integer.valueOf(txtQTD.getText()), Double.valueOf(txtPrecoU.getText()), 
-                            (Integer.valueOf(txtQTD.getText()) * Double.valueOf(txtPrecoU.getText())), 
+                            tabelaItens.getSelectionModel().getSelectedItem().getVenda().getValue(),
+                            tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue(),
+                            Integer.valueOf(txtQTD.getText()), Double.valueOf(txtPrecoU.getText()),
+                            (Integer.valueOf(txtQTD.getText()) * Double.valueOf(txtPrecoU.getText())),
                             tabelaItens.getSelectionModel().getSelectedItem().getId().getValue());
                     idao.atualizar(iv);
                     atualizarTabelaItens();
@@ -256,7 +259,6 @@ public class FXML_VendasController implements Initializable {
                         + "Tente uma quantidade menor!");
                 dialogo1.showAndWait();
             }
-
         }
 
     }
@@ -280,11 +282,17 @@ public class FXML_VendasController implements Initializable {
 
     @FXML
     private void on_menuItemExcluirVenda(ActionEvent event) {
+        
+        ObservableList<vendas> Lista1 = FXCollections.observableArrayList();
+        ObservableList<ItemVenda> Lista = FXCollections.observableArrayList();
         try {
             vdao.excluir(tabelaVendas.getSelectionModel().getSelectedItem().getId().longValue());
+            tabelaVendas.setItems(DataVendas);
+        
+            tabelaItens.setItems(Lista);
             atualizarTabelaVendas();
         } catch (Exception e) {
-            System.out.println("erro: " + e);
+            System.out.println("erro menuitemEcluirVenda: " + e);
         }
     }
 
@@ -335,7 +343,7 @@ public class FXML_VendasController implements Initializable {
     @FXML
     private void on_cont_AlterarQTDItemVenda(ActionEvent event) {
         try {
-            op =1;
+            op = 1;
             txtCod.setText(pdao.pegarCodigo(tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue()));
             txtPrecoU.setText(tabelaItens.getSelectionModel().getSelectedItem().getPreco().getValue().toString());
             pdao.updateQTD(tabelaItens.getSelectionModel().getSelectedItem().getQtd().getValue(), tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue());
