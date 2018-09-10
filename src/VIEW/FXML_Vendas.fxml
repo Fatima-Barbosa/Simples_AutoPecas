@@ -108,7 +108,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="labelTotalVendas" layoutX="755.0" layoutY="503.0" text="Total das vendas: " textFill="#2980b9" AnchorPane.rightAnchor="210.0">
+            <Label fx:id="labelTotalVendas" layoutX="862.0" layoutY="500.0" text="Total das vendas: " textFill="#2980b9" AnchorPane.rightAnchor="103.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -119,7 +119,7 @@
                </font>
             </JFXButton>
             <FontAwesomeIcon fill="#eeeeee" iconName="SHOPPING_CART" layoutX="50.0" layoutY="525.0" size="2em" />
-            <Label fx:id="labelTotalCompra" layoutX="517.0" layoutY="503.0" text="Total da compra:" textFill="#2980b9">
+            <Label fx:id="labelTotalCompra" layoutX="449.0" layoutY="500.0" text="Total da compra:" textFill="#2980b9">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

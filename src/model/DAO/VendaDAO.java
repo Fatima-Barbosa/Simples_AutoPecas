@@ -182,6 +182,28 @@ public class VendaDAO {
         return n;
     }
     
+        public double cacularTotalVendas(String data){
+        connection = new ConnectionFactory().getConnection();
+        ObservableList<vendas> Lista
+                = FXCollections.observableArrayList();
+        double total = 0;
+        sql = "select * from venda where dataV = ?";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, data);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {                
+                total += rs.getDouble("valorTotal");
+            }
+            stmt.close();
+            connection.close(); 
+            //rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
     public Connection getConnection() {
         return connection;
     }

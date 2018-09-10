@@ -75,6 +75,29 @@ public class ItemVendaDAO {
         }
         return Lista;
     }
+    
+    public double CalcularTotal(Long venda) {
+        ObservableList<ItemVenda> Lista = FXCollections.observableArrayList();
+        double total = 0;
+        connection = new ConnectionFactory().getConnection();
+        //sum(valorTotal)
+        sql = "SELECT * FROM item_venda WHERE venda = ?;";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, venda);
+            //total = stmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                total += rs.getDouble("valorTotal");
+            }
+            stmt.close();
+            connection.close();
+        } catch (SQLException ex) {
+            System.out.println("Erro no gerarLista de itemVenda: " + ex);
+            Logger.getLogger(ItemVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
 
     public void excluir(ItemVenda iv) {
         connection = new ConnectionFactory().getConnection();
@@ -89,6 +112,7 @@ public class ItemVendaDAO {
             stmt.close();
             connection.close();
         } catch (SQLException ex) {
+            System.out.println("erro : "+ex);
             Logger.getLogger(ItemVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

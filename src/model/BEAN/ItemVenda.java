@@ -84,5 +84,9 @@ public class ItemVenda {
         this.id = id;
     }
     
+    @Override
+    public String toString(){
+        return "Item de Venda:\n"+"produto: "+getProduto()+"Venda: "+getVenda();
+    }
     
 }

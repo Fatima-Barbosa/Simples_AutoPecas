@@ -13,73 +13,73 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchorPaneClientes" prefHeight="667.0" prefWidth="1157.0" style="-fx-background-color: #B4CDCD;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXML_ClientesController">
    <children>
-      <TableView fx:id="tabela_cliente" onMouseClicked="#pegarID" prefHeight="575.0" prefWidth="602.0">
+      <TableView fx:id="tabela_cliente" onMouseClicked="#pegarID" prefHeight="618.0" prefWidth="673.0">
         <columns>
-          <TableColumn fx:id="colNome" prefWidth="124.0" text="Nome" />
-          <TableColumn fx:id="colCPF" prefWidth="137.0" text="CPF" />
-            <TableColumn fx:id="colTelefone" prefWidth="138.0" text="Telefone" />
-            <TableColumn fx:id="colConta" prefWidth="126.0" text="Conta" />
-            <TableColumn fx:id="colID" prefWidth="76.0" text="ID" />
+          <TableColumn fx:id="colNome" prefWidth="184.0" text="Nome" />
+          <TableColumn fx:id="colCPF" prefWidth="163.0" text="CPF" />
+            <TableColumn fx:id="colTelefone" prefWidth="145.0" text="Telefone" />
+            <TableColumn fx:id="colConta" prefWidth="108.0" text="Conta" />
+            <TableColumn fx:id="colID" prefWidth="70.0" text="ID" />
         </columns>
          <contextMenu>
             <ContextMenu>
               <items>
                 <MenuItem fx:id="contExcluir" mnemonicParsing="false" onAction="#on_contExcluir" text="Excluir" />
                   <MenuItem fx:id="contEditar" mnemonicParsing="false" onAction="#on_contEditar" text="Editar" />
-                  <MenuItem fx:id="contInfo" mnemonicParsing="false" onAction="#on_contInfo" text="Informações" />
+                  <MenuItem fx:id="contInfo" mnemonicParsing="false" onAction="#on_contInfo" text="Conta" />
               </items>
             </ContextMenu>
          </contextMenu>
       </TableView>
-      <Label layoutX="611.0" layoutY="14.0" text="Clientes" textFill="#2980b9" AnchorPane.topAnchor="14.0">
+      <Label layoutX="684.0" layoutY="14.0" text="Clientes" textFill="#2980b9" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Calibri Bold" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="330.0" layoutY="587.0" text="Pesquisar" textFill="#2980b9">
+      <Label layoutX="396.0" layoutY="632.0" text="Pesquisar" textFill="#2980b9">
          <font>
             <Font name="Calibri Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtBusc" layoutX="394.0" layoutY="583.0" onKeyPressed="#on_busc" prefHeight="25.0" prefWidth="160.0" AnchorPane.bottomAnchor="14.0" />
-      <Button fx:id="btnOk" layoutX="565.0" layoutY="583.0" mnemonicParsing="false" onAction="#on_ok" prefHeight="25.0" prefWidth="36.0" style="-fx-background-color: #2980B9;" text="Ok" textFill="WHITE" />
-      <TextField fx:id="txt_nome" layoutX="631.0" layoutY="124.0" onKeyPressed="#on_nome_enter" prefHeight="25.0" prefWidth="160.0">
+      <TextField fx:id="txtBusc" layoutX="464.0" layoutY="628.0" onKeyPressed="#on_busc" prefHeight="25.0" prefWidth="160.0" AnchorPane.bottomAnchor="14.0" />
+      <Button fx:id="btnOk" layoutX="637.0" layoutY="628.0" mnemonicParsing="false" onAction="#on_ok" prefHeight="25.0" prefWidth="36.0" style="-fx-background-color: #2980B9;" text="Ok" textFill="WHITE" />
+      <TextField fx:id="txt_nome" layoutX="711.0" layoutY="124.0" onKeyPressed="#on_nome_enter" prefHeight="30.0" prefWidth="187.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="txt_cpf" layoutX="809.0" layoutY="124.0" onKeyPressed="#on_cpf_enter" prefHeight="25.0" prefWidth="187.0">
+      <TextField fx:id="txt_cpf" layoutX="926.0" layoutY="124.0" onKeyPressed="#on_cpf_enter" prefHeight="25.0" prefWidth="187.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="txt_telefone" layoutX="810.0" layoutY="197.0" onKeyPressed="#on_tel_enter" prefHeight="30.0" prefWidth="187.0">
+      <TextField fx:id="txt_telefone" layoutX="926.0" layoutY="197.0" onKeyPressed="#on_tel_enter" prefHeight="30.0" prefWidth="187.0">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <Label layoutX="631.0" layoutY="97.0" text="Nome" textFill="#2980b9">
+      <Label layoutX="711.0" layoutY="97.0" text="Nome" textFill="#2980b9">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="809.0" layoutY="97.0" text="CPF" textFill="#2980b9">
+      <Label layoutX="926.0" layoutY="97.0" text="CPF" textFill="#2980b9">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="810.0" layoutY="166.0" text="Telefone" textFill="#2980b9">
+      <Label layoutX="926.0" layoutY="166.0" text="Telefone" textFill="#2980b9">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="631.0" layoutY="166.0" text="Endereço" textFill="#2980b9">
+      <Label layoutX="711.0" layoutY="166.0" text="Endereço" textFill="#2980b9">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextArea fx:id="txt_endereco" layoutX="631.0" layoutY="197.0" onKeyPressed="#on_ender_enter" prefHeight="114.0" prefWidth="160.0">
+      <TextArea fx:id="txt_endereco" layoutX="711.0" layoutY="197.0" onKeyPressed="#on_ender_enter" prefHeight="114.0" prefWidth="187.0">
          <font>
             <Font size="14.0" />
          </font></TextArea>
-      <Button fx:id="btnSalvar" layoutX="809.0" layoutY="254.0" mnemonicParsing="false" onAction="#on_Salvar" prefHeight="30.0" prefWidth="187.0" style="-fx-background-color: #2980B9;" text="Salvar" textFill="WHITE">
+      <Button fx:id="btnSalvar" layoutX="928.0" layoutY="254.0" mnemonicParsing="false" onAction="#on_Salvar" prefHeight="30.0" prefWidth="187.0" style="-fx-background-color: #2980B9;" text="Salvar" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="16.0" />
          </font>

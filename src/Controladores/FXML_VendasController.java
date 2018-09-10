@@ -100,6 +100,8 @@ public class FXML_VendasController implements Initializable {
     private MenuItem cont_RemoverItemVenda;
     @FXML
     private MenuItem cont_AlterarQTDItemVenda;
+    @FXML
+    private Label labelTotalCompra;
 
     /**
      * Initializes the controller class.
@@ -112,7 +114,7 @@ public class FXML_VendasController implements Initializable {
          * KeyEvent event = null; A primeira veda é niciada quando inicia a
          * tela, já com total de venda zerada! *
          */
-            vendas vi = new vendas(0.0);
+        vendas vi = new vendas(0.0);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -135,6 +137,7 @@ public class FXML_VendasController implements Initializable {
 
 //        DataItem = idao.gerarLista(vdao.retornarID());
 //        tabelaItens.setItems(DataItem);
+        labelTotalVendas();
         assert AnchorPane_Vendas != null : "fx:id=\"AnchorPane_Vendas\" was not injected: check your FXML file 'FXML_Vendas.fxml'.";
         assert txtCod != null : "fx:id=\"txtCod\" was not injected: check your FXML file 'FXML_Vendas.fxml'.";
         assert txtPrecoU != null : "fx:id=\"txtPrecoU\" was not injected: check your FXML file 'FXML_Vendas.fxml'.";
@@ -160,7 +163,7 @@ public class FXML_VendasController implements Initializable {
     @FXML
     private void on_vender(ActionEvent event) {
 //        try {
-            ItemVenda iv = new ItemVenda(vdao.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()), (Integer.parseInt(txtQTD.getText()) * Double.parseDouble(txtPrecoU.getText())));
+        ItemVenda iv = new ItemVenda(vdao.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()), (Integer.parseInt(txtQTD.getText()) * Double.parseDouble(txtPrecoU.getText())));
 //        } catch (NumberFormatException e) {
 //            System.out.println("Nao há uma venda criada"+e);
 //        }
@@ -172,6 +175,7 @@ public class FXML_VendasController implements Initializable {
                 vdao.atualizarTotal(idao.totalVenda(vdao.retornarID()), vdao.retornarID());
                 atualizarTabelaItens();
                 atualizarTabelaVendas();
+                labelTotalCompra();
             } else {
                 Alert dialogo1 = new Alert(Alert.AlertType.INFORMATION);
                 dialogo1.setTitle("Atenção");
@@ -243,6 +247,7 @@ public class FXML_VendasController implements Initializable {
 
                     Double total = Integer.parseInt(txtQTD.getText()) * Double.parseDouble(txtPrecoU.getText());
                     txtTotal.setText(total.toString());
+                    // fazer um try
                     ItemVenda i = new ItemVenda(v.retornarID(), pdao.pegarID(txtCod.getText()), Integer.parseInt(txtQTD.getText()), Double.parseDouble(txtPrecoU.getText()), Double.parseDouble(txtTotal.getText()));
                     idao.adicionarItem(i);
                     vdao.atualizarTotal(idao.totalVenda(v.retornarID()), vdao.retornarID());
@@ -273,24 +278,30 @@ public class FXML_VendasController implements Initializable {
 //        String horaformatada = sdf.format(hora);
         DataVendas = vdao.gerarLista(dateFormat.format(date));
         tabelaVendas.setItems(DataVendas);
+        labelTotalVendas();
+        labelTotalCompra();
     }
 
     private void atualizarTabelaItens() {
         DataItem = idao.gerarLista(vdao.retornarID());
         tabelaItens.setItems(DataItem);
+        labelTotalCompra();
+        labelTotalVendas();
     }
 
     @FXML
     private void on_menuItemExcluirVenda(ActionEvent event) {
-        
+
         ObservableList<vendas> Lista1 = FXCollections.observableArrayList();
         ObservableList<ItemVenda> Lista = FXCollections.observableArrayList();
         try {
             vdao.excluir(tabelaVendas.getSelectionModel().getSelectedItem().getId().longValue());
             tabelaVendas.setItems(DataVendas);
-        
+
             tabelaItens.setItems(Lista);
             atualizarTabelaVendas();
+            atualizarTabelaItens();
+            labelTotalVendas();
         } catch (Exception e) {
             System.out.println("erro menuitemEcluirVenda: " + e);
         }
@@ -303,6 +314,7 @@ public class FXML_VendasController implements Initializable {
             vdao.adicionarVenda(v);
             atualizarTabelaVendas();
             atualizarTabelaItens();
+            labelTotalVendas();
             LimparCampos();
         }
     }
@@ -318,7 +330,9 @@ public class FXML_VendasController implements Initializable {
     private void on_NovaVenda(ActionEvent event) {
         vendas v = new vendas(0.0);
         vdao.adicionarVenda(v);
+        labelTotalVendas();
         atualizarTabelaVendas();
+        atualizarTabelaItens();
         LimparCampos();
     }
 
@@ -332,8 +346,12 @@ public class FXML_VendasController implements Initializable {
             iv.setTotal(tabelaItens.getSelectionModel().getSelectedItem().getTotal());
             iv.setPreco(tabelaItens.getSelectionModel().getSelectedItem().getPreco());
             idao.excluir(iv);
+            System.out.println(""+tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue());
+            iv.toString();
             atualizarTabelaItens();
             atualizarTabelaVendas();
+            labelTotalCompra();
+            labelTotalVendas();
         } catch (Exception e) {
             System.out.println("erro:" + e);
         }
@@ -349,6 +367,8 @@ public class FXML_VendasController implements Initializable {
             pdao.updateQTD(tabelaItens.getSelectionModel().getSelectedItem().getQtd().getValue(), tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue());
             vdao.atualizarTotalRemovido(tabelaItens.getSelectionModel().getSelectedItem().getTotal().getValue(), tabelaItens.getSelectionModel().getSelectedItem().getVenda().longValue());
             txtQTD.requestFocus();
+            atualizarTabelaItens();            
+            atualizarTabelaVendas();
         } catch (Exception e) {
             System.out.println("erro: " + e);
         }
@@ -363,12 +383,17 @@ public class FXML_VendasController implements Initializable {
         try {
             DataItem = idao.gerarLista(tabelaVendas.getSelectionModel().getSelectedItem().getId().longValue());
             tabelaItens.setItems(DataItem);
+
+            double total = 0;
+//            for (int i = 0; i < tabelaItens.getSelectionModel().getSelectedItems().size(); i++) {
+//                total += tabelaItens.getSelectionModel().getSelectedItems().get(i).getTotal().getValue();
+//            }
+            labelTotalCompra.setText("Total da compra: " + (total+idao.CalcularTotal(tabelaVendas.getSelectionModel().getSelectedItem().getId().getValue())));
         } catch (Exception e) {
             System.out.println("não há nada  " + e);
         }
     }
 
-    @FXML
     private void on_keyTotal_addItem(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
 //            VendaDAO v = new VendaDAO();
@@ -382,4 +407,23 @@ public class FXML_VendasController implements Initializable {
 //            btnNovaVenda.requestFocus();
         }
     }
+
+    public void labelTotalCompra() {
+//        System.out.println("tamanho " + tabelaItens.getSelectionModel().getSelectedItems().size());
+        double total = 0;
+//        for (int i = 0; i < tabelaItens.getSelectionModel().getSelectedItems().size(); i++) {
+//            total += tabelaItens.getSelectionModel().getSelectedItems().get(i).getTotal().getValue();
+//        }
+//        labelTotalCompra.setText("Total da compra: " + total);
+        labelTotalCompra.setText("Total da compra: " + (total+idao.CalcularTotal(vdao.retornarID())));
+        
+    }
+
+    public void labelTotalVendas() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Date d = new Date();
+
+        labelTotalVendas.setText("Total das vendas: " + vdao.cacularTotalVendas(sdf.format(d)));
+    }
+
 }

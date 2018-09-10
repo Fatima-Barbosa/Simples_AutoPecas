@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Fátima/Desktop/Application_AutoPecas-Rafael/SistemaAutoPecas/src/model/DAO/ContaDAO.java</file>
+            <file>file:/C:/Users/Fátima/Desktop/Application_AutoPecas-Rafael/SistemaAutoPecas/src/model/DAO/ItemVendaDAO.java</file>
             <file>file:/C:/Users/Fátima/Desktop/Application_AutoPecas-Rafael/SistemaAutoPecas/src/Controladores/FXML_VendasController.java</file>
-            <file>file:/C:/Users/Fátima/Desktop/Application_AutoPecas-Rafael/SistemaAutoPecas/src/model/BEAN/ItemVenda.java</file>
+            <file>file:/C:/Users/Fátima/Desktop/Application_AutoPecas-Rafael/SistemaAutoPecas/src/model/DAO/VendaDAO.java</file>
         </group>
     </open-files>
 </project-private>
