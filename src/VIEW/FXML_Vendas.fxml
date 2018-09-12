@@ -69,11 +69,12 @@
             </Label>
             <TableView fx:id="tabelaItens" accessibleText="Vendas" layoutX="20.0" layoutY="123.0" prefHeight="360.0" prefWidth="587.0" style="-fx-background-size: 15;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="378.0">
               <columns>
-                <TableColumn fx:id="colProduto" prefWidth="150.0" text="Produto" />
-                <TableColumn fx:id="colQTD" prefWidth="109.0" text="Quantidade" />
-                  <TableColumn fx:id="colPrecoU" prefWidth="134.0" text="Preco unitário" />
-                  <TableColumn fx:id="col_IDvenda" prefWidth="168.0" text="ID_Venda" />
-                  <TableColumn fx:id="colTotal" prefWidth="155.0" text="Total" />
+                <TableColumn fx:id="colProduto" prefWidth="175.0" text="Produto" />
+                <TableColumn fx:id="colQTD" prefWidth="149.0" text="Quantidade" />
+                  <TableColumn fx:id="colPrecoU" prefWidth="132.0" text="Preco unitário" />
+                  <TableColumn fx:id="col_IDvenda" prefWidth="103.0" text="ID_Venda" />
+                  <TableColumn fx:id="idItemVenda" prefWidth="74.0" text="ID" />
+                  <TableColumn fx:id="colTotal" minWidth="0.0" prefWidth="83.0" text="Total" />
               </columns>
                <contextMenu>
                   <ContextMenu>
@@ -133,7 +134,6 @@
           <Menu mnemonicParsing="false" text="Vendas">
             <items>
               <MenuItem fx:id="menuItemNova_venda" mnemonicParsing="false" onAction="#on_menuItem_novaVenda" text="Nova venda       F1" />
-                  <MenuItem mnemonicParsing="false" text="Relatório do dia" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Clientes" />

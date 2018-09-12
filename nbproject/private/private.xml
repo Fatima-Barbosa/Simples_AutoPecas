@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/Users/Fátima/Desktop/Application_AutoPecas-Rafael/SistemaAutoPecas/src/model/DAO/ItemVendaDAO.java</file>
             <file>file:/C:/Users/Fátima/Desktop/Application_AutoPecas-Rafael/SistemaAutoPecas/src/Controladores/FXML_VendasController.java</file>
+            <file>file:/C:/Users/Fátima/Desktop/Application_AutoPecas-Rafael/SistemaAutoPecas/src/model/DAO/ConnectionFactory.java</file>
+            <file>file:/C:/Users/Fátima/Desktop/Application_AutoPecas-Rafael/SistemaAutoPecas/src/model/DAO/ProdutoDAO.java</file>
             <file>file:/C:/Users/Fátima/Desktop/Application_AutoPecas-Rafael/SistemaAutoPecas/src/model/DAO/VendaDAO.java</file>
         </group>
     </open-files>

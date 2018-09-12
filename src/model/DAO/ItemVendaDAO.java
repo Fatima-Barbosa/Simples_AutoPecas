@@ -104,9 +104,9 @@ public class ItemVendaDAO {
         sql = "delete from item_venda where id = ?";
         try {
             pdao.updateQTD(iv.getQtd().getValue(), iv.getProduto().getValue());
-            vdao.atualizarTotalRemovido(iv.getTotal().getValue(), iv.getProduto().getValue());
+            vdao.atualizarTotalRemovido(iv.getPreco().getValue() * iv.getQtd().getValue(), iv.getVenda().getValue());
             stmt = connection.prepareStatement(sql);
-            stmt.setLong(1, iv.getProduto().longValue());
+            stmt.setLong(1, iv.getId().longValue());
             stmt.execute();
             System.out.println("Excluido item");
             stmt.close();

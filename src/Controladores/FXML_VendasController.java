@@ -31,6 +31,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.BEAN.ItemVenda;
 import model.BEAN.vendas;
 import model.DAO.ItemVendaDAO;
@@ -144,8 +145,8 @@ public class FXML_VendasController implements Initializable {
         colTotal.setCellValueFactory(cellData -> cellData.getValue().getTotal().asString());
         idItemVenda.setCellValueFactory(cellData -> cellData.getValue().getId().asString());
 
-//        DataItem = idao.gerarLista(vdao.retornarID());
-//        tabelaItens.setItems(DataItem);
+        DataItem = idao.gerarLista(vdao.retornarID());
+        tabelaItens.setItems(DataItem);
         labelTotalVendas();
         assert AnchorPane_Vendas != null : "fx:id=\"AnchorPane_Vendas\" was not injected: check your FXML file 'FXML_Vendas.fxml'.";
         assert txtCod != null : "fx:id=\"txtCod\" was not injected: check your FXML file 'FXML_Vendas.fxml'.";
@@ -211,6 +212,9 @@ public class FXML_VendasController implements Initializable {
 
     @FXML
     private void on_menuItem_Sair(ActionEvent event) {
+//        Stage stage = (Stage)event.clone();
+//        getScene().getWindow();
+//        stage.close();
     }
 
     public String inverteData(Date dataInicio) {
@@ -357,13 +361,12 @@ public class FXML_VendasController implements Initializable {
             iv.setVenda(tabelaItens.getSelectionModel().getSelectedItem().getVenda());
             iv.setTotal(tabelaItens.getSelectionModel().getSelectedItem().getTotal());
             iv.setPreco(tabelaItens.getSelectionModel().getSelectedItem().getPreco());
+            iv.setId(tabelaItens.getSelectionModel().getSelectedItem().getId());
             idao.excluir(iv);
             System.out.println("" + tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue());
             System.out.println(""+iv.toString());
             atualizarTabelaItens();
             atualizarTabelaVendas();
-            labelTotalCompra();
-            labelTotalVendas();
         } catch (Exception e) {
             System.out.println("erro:" + e);
         }
