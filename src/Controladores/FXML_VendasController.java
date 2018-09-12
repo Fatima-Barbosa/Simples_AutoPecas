@@ -11,9 +11,11 @@ import static java.time.temporal.TemporalQueries.localDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -46,6 +48,9 @@ public class FXML_VendasController implements Initializable {
     VendaDAO vdao = new VendaDAO();
     ItemVendaDAO idao = new ItemVendaDAO();
     ProdutoDAO pdao = new ProdutoDAO();
+    
+    long aux = 0, aux2 = 0;
+    
     KeyEvent event;
     int op = 0;
     @FXML
@@ -62,6 +67,8 @@ public class FXML_VendasController implements Initializable {
     private TextField txtQTD;
     @FXML
     private TableView<ItemVenda> tabelaItens;
+    @FXML
+    private TableColumn<ItemVenda, String> idItemVenda;
     @FXML
     private TableColumn<ItemVenda, String> colProduto;
     @FXML
@@ -103,6 +110,7 @@ public class FXML_VendasController implements Initializable {
     @FXML
     private Label labelTotalCompra;
 
+
     /**
      * Initializes the controller class.
      *
@@ -134,6 +142,7 @@ public class FXML_VendasController implements Initializable {
         colProduto.setCellValueFactory(cellData -> cellData.getValue().getProduto().asString());
         colQTD.setCellValueFactory(cellData -> cellData.getValue().getQtd().asString());
         colTotal.setCellValueFactory(cellData -> cellData.getValue().getTotal().asString());
+        idItemVenda.setCellValueFactory(cellData -> cellData.getValue().getId().asString());
 
 //        DataItem = idao.gerarLista(vdao.retornarID());
 //        tabelaItens.setItems(DataItem);
@@ -226,18 +235,21 @@ public class FXML_VendasController implements Initializable {
 
     @FXML
     private void onKey_CalcularTotal(KeyEvent event) {
-//        !"".equals(txtQTD.getText())
-//      Pega o evento dentro da textfield QTD
         if (event.getCode() == KeyCode.ENTER) {
             if (pdao.verificarEstoque(Integer.parseInt(txtCod.getText())) >= Integer.parseInt(txtQTD.getText())) {
                 if (op == 1) {
-                    ItemVenda iv = new ItemVenda(
-                            tabelaItens.getSelectionModel().getSelectedItem().getVenda().getValue(),
-                            tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue(),
-                            Integer.valueOf(txtQTD.getText()), Double.valueOf(txtPrecoU.getText()),
-                            (Integer.valueOf(txtQTD.getText()) * Double.valueOf(txtPrecoU.getText())),
-                            tabelaItens.getSelectionModel().getSelectedItem().getId().getValue());
-                    idao.atualizar(iv);
+                    ItemVenda i = new ItemVenda(
+                            vdao.retornarID(), 
+                            pdao.pegarID(txtCod.getText()), 
+                            Integer.parseInt(txtQTD.getText()), 
+                            Double.parseDouble(txtPrecoU.getText()), 
+                            Integer.parseInt(txtQTD.getText()) * Double.parseDouble(txtPrecoU.getText()), 
+                            aux);
+                    //pdao.baixaQTD(Integer.parseInt(txtQTD.getText()), pdao.pegarID(txtCod.getText()));
+            //vdao.atualizarTotalRemovido(tabelaItens.getSelectionModel().getSelectedItem().getTotal().getValue(), tabelaItens.getSelectionModel().getSelectedItem().getVenda().longValue());
+            
+                    idao.atualizar(i);
+                    vdao.atualizarTotal(idao.totalVenda(vdao.retornarID()), aux2);
                     atualizarTabelaItens();
                     atualizarTabelaVendas();
                     op = 0;
@@ -292,7 +304,7 @@ public class FXML_VendasController implements Initializable {
     @FXML
     private void on_menuItemExcluirVenda(ActionEvent event) {
 
-        ObservableList<vendas> Lista1 = FXCollections.observableArrayList();
+        //ObservableList<vendas> Lista1 = FXCollections.observableArrayList();
         ObservableList<ItemVenda> Lista = FXCollections.observableArrayList();
         try {
             vdao.excluir(tabelaVendas.getSelectionModel().getSelectedItem().getId().longValue());
@@ -346,8 +358,8 @@ public class FXML_VendasController implements Initializable {
             iv.setTotal(tabelaItens.getSelectionModel().getSelectedItem().getTotal());
             iv.setPreco(tabelaItens.getSelectionModel().getSelectedItem().getPreco());
             idao.excluir(iv);
-            System.out.println(""+tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue());
-            iv.toString();
+            System.out.println("" + tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue());
+            System.out.println(""+iv.toString());
             atualizarTabelaItens();
             atualizarTabelaVendas();
             labelTotalCompra();
@@ -360,19 +372,20 @@ public class FXML_VendasController implements Initializable {
 
     @FXML
     private void on_cont_AlterarQTDItemVenda(ActionEvent event) {
+        aux = tabelaItens.getSelectionModel().getSelectedItem().getId().getValue();
+        aux2 = tabelaItens.getSelectionModel().getSelectedItem().getVenda().getValue();
         try {
             op = 1;
             txtCod.setText(pdao.pegarCodigo(tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue()));
             txtPrecoU.setText(tabelaItens.getSelectionModel().getSelectedItem().getPreco().getValue().toString());
             pdao.updateQTD(tabelaItens.getSelectionModel().getSelectedItem().getQtd().getValue(), tabelaItens.getSelectionModel().getSelectedItem().getProduto().getValue());
             vdao.atualizarTotalRemovido(tabelaItens.getSelectionModel().getSelectedItem().getTotal().getValue(), tabelaItens.getSelectionModel().getSelectedItem().getVenda().longValue());
-            txtQTD.requestFocus();
-            atualizarTabelaItens();            
+                            
+            atualizarTabelaItens();
             atualizarTabelaVendas();
         } catch (Exception e) {
             System.out.println("erro: " + e);
         }
-
     }
 
     @FXML
@@ -388,7 +401,7 @@ public class FXML_VendasController implements Initializable {
 //            for (int i = 0; i < tabelaItens.getSelectionModel().getSelectedItems().size(); i++) {
 //                total += tabelaItens.getSelectionModel().getSelectedItems().get(i).getTotal().getValue();
 //            }
-            labelTotalCompra.setText("Total da compra: " + (total+idao.CalcularTotal(tabelaVendas.getSelectionModel().getSelectedItem().getId().getValue())));
+            labelTotalCompra.setText("Total da compra: " + (total + idao.CalcularTotal(tabelaVendas.getSelectionModel().getSelectedItem().getId().getValue())));
         } catch (Exception e) {
             System.out.println("não há nada  " + e);
         }
@@ -415,8 +428,8 @@ public class FXML_VendasController implements Initializable {
 //            total += tabelaItens.getSelectionModel().getSelectedItems().get(i).getTotal().getValue();
 //        }
 //        labelTotalCompra.setText("Total da compra: " + total);
-        labelTotalCompra.setText("Total da compra: " + (total+idao.CalcularTotal(vdao.retornarID())));
-        
+        labelTotalCompra.setText("Total da compra: " + (total + idao.CalcularTotal(vdao.retornarID())));
+
     }
 
     public void labelTotalVendas() {
