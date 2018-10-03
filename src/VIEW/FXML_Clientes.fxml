@@ -79,10 +79,20 @@
          <font>
             <Font size="14.0" />
          </font></TextArea>
-      <Button fx:id="btnSalvar" layoutX="928.0" layoutY="254.0" mnemonicParsing="false" onAction="#on_Salvar" prefHeight="30.0" prefWidth="187.0" style="-fx-background-color: #2980B9;" text="Salvar" textFill="WHITE">
+      <Button fx:id="btnSalvar" layoutX="926.0" layoutY="239.0" mnemonicParsing="false" onAction="#on_Salvar" prefHeight="30.0" prefWidth="187.0" style="-fx-background-color: #2980B9;" text="Salvar" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="16.0" />
          </font>
       </Button>
+      <Button fx:id="btnVerConta" layoutX="926.0" layoutY="281.0" mnemonicParsing="false" onAction="#On_verConta" prefHeight="30.0" prefWidth="187.0" style="-fx-background-color: #3CB371;" text="Ver conta">
+         <font>
+            <Font name="Calibri Bold" size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="mensagem" layoutX="723.0" layoutY="629.0" text="*Selecione um cliente na tabela e click em ver conta!" textFill="#1d9a51">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -96,7 +96,7 @@ public class FXML_infoClienteController extends FXML_ClientesController implemen
         double valor = 0;
         valor = Data.stream().map((conta) -> conta.getTotal().doubleValue()).reduce(valor, (accumulator, _item) -> accumulator + _item);
         labelTotal.setText("Valor Total:  " + valor);
-
+        c.setId(0);
         assert labelNome != null : "fx:id=\"labelNome\" was not injected: check your FXML file 'FXML_infoCliente.fxml'.";
         assert labelTel != null : "fx:id=\"labelTel\" was not injected: check your FXML file 'FXML_infoCliente.fxml'.";
         assert labelCPF != null : "fx:id=\"labelCPF\" was not injected: check your FXML file 'FXML_infoCliente.fxml'.";

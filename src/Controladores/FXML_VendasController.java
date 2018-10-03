@@ -15,12 +15,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -43,7 +44,7 @@ import model.DAO.VendaDAO;
  *
  * @author Fátima
  */
-public class FXML_VendasController implements Initializable {
+public class FXML_VendasController extends JanelaController implements Initializable{
 
     vendas v = new vendas(0.0);
     VendaDAO vdao = new VendaDAO();
@@ -110,6 +111,8 @@ public class FXML_VendasController implements Initializable {
     private MenuItem cont_AlterarQTDItemVenda;
     @FXML
     private Label labelTotalCompra;
+    @FXML
+    private MenuItem MenuItemProduto;
 
 
     /**
@@ -440,6 +443,23 @@ public class FXML_VendasController implements Initializable {
         Date d = new Date();
 
         labelTotalVendas.setText("Total das vendas: " + vdao.cacularTotalVendas(sdf.format(d)));
+    }
+
+    @FXML
+    private void On_menuItemProduto(ActionEvent event) {
+//        JanelaController j = new JanelaController();
+//        JFXDialog dialog = new JFXDialog();
+//        JFXDialogLayout layout = new JFXDialogLayout();
+//        JFXButton button = new JFXButton("click");
+//        
+//        layout.setHeading(new Text("hello"));
+//        button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseevent) -> {
+//            dialog.close();
+//        });
+//        layout.setBody(button);
+//        dialog.setTransitionType(JFXDialog.DialogTransition.TOP);
+//        dialog.setDialogContainer(layout);
+//        dialog.show();
     }
 
 }

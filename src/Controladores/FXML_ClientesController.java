@@ -1,5 +1,7 @@
 package Controladores;
 
+import java.awt.Color;
+import java.awt.PageAttributes;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -16,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -76,6 +79,10 @@ public class FXML_ClientesController implements Initializable {
     private MenuItem contInfo;
     @FXML
     private AnchorPane anchorPaneClientes;
+    @FXML
+    private Button btnVerConta;
+    @FXML
+    private Label mensagem;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -280,6 +287,18 @@ public class FXML_ClientesController implements Initializable {
                 btnSalvar.setText("Salvar");
                 atualizarTabela();
             }
+        }
+    }
+
+    @FXML
+    private void On_verConta(ActionEvent event) throws IOException{
+        try {
+            AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/VIEW/FXML_infoCliente.fxml"));
+            anchorPaneClientes.getChildren().setAll(a);
+        } catch (IOException e) {
+            mensagem.setStyle("-fx-text-fill: red");
+            System.out.println("entrou");
+            System.out.println("erro: "+e);
         }
     }
 

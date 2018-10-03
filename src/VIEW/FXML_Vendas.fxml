@@ -139,6 +139,7 @@
           <Menu mnemonicParsing="false" text="Clientes" />
           <Menu mnemonicParsing="false" text="Help">
             <items>
+                  <MenuItem fx:id="MenuItemProduto" mnemonicParsing="false" onAction="#On_menuItemProduto" text="Produto" />
                   <MenuItem fx:id="menuItem_sair" mnemonicParsing="false" onAction="#on_menuItem_Sair" text="Sair" />
             </items>
           </Menu>

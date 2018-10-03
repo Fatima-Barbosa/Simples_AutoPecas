@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="PaneJanela" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="251.0" prefWidth="538.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.JanelaController">
+   <children>
+      <TextField layoutX="22.0" layoutY="55.0" prefHeight="37.0" prefWidth="182.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="217.0" layoutY="55.0" prefHeight="37.0" prefWidth="120.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="350.0" layoutY="55.0" prefHeight="37.0" prefWidth="169.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="22.0" layoutY="28.0" text="Cod. Barra" textFill="#3a7be0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="217.0" layoutY="28.0" text="Quantidade" textFill="#3a7be0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="350.0" layoutY="28.0" text="Total" textFill="#3a7be0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="113.0" text="Informações do produto:" textFill="#3a7be0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="158.0" text="Produto" textFill="#3a7be0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="231.0" layoutY="158.0" text="Quantidade em estoque" textFill="#3a7be0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="432.0" layoutY="158.0" text="ID" textFill="#3a7be0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="22.0" layoutY="187.0" prefHeight="37.0" prefWidth="182.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="231.0" layoutY="187.0" prefHeight="37.0" prefWidth="177.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="431.0" layoutY="187.0" prefHeight="37.0" prefWidth="83.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
