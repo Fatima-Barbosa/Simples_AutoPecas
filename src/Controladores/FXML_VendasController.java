@@ -1,27 +1,20 @@
 package Controladores;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
 import java.net.URL;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import static java.time.temporal.TemporalQueries.localDate;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -31,8 +24,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
 import model.BEAN.ItemVenda;
 import model.BEAN.vendas;
 import model.DAO.ItemVendaDAO;
@@ -113,6 +105,8 @@ public class FXML_VendasController extends JanelaController implements Initializ
     private Label labelTotalCompra;
     @FXML
     private MenuItem MenuItemProduto;
+    @FXML
+    private StackPane pane;
 
 
     /**
@@ -447,19 +441,11 @@ public class FXML_VendasController extends JanelaController implements Initializ
 
     @FXML
     private void On_menuItemProduto(ActionEvent event) {
-//        JanelaController j = new JanelaController();
-//        JFXDialog dialog = new JFXDialog();
-//        JFXDialogLayout layout = new JFXDialogLayout();
-//        JFXButton button = new JFXButton("click");
-//        
-//        layout.setHeading(new Text("hello"));
-//        button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseevent) -> {
-//            dialog.close();
-//        });
-//        layout.setBody(button);
-//        dialog.setTransitionType(JFXDialog.DialogTransition.TOP);
-//        dialog.setDialogContainer(layout);
-//        dialog.show();
+        JanelaController j = new JanelaController();
+//        Alert a = new Alert(Alert.AlertType.INFORMATION);
+//        a.setTitle("hello");
+//        a.
+//        a.show();
     }
 
 }
